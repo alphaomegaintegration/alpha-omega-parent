@@ -1,21 +1,18 @@
 version: 0.1
 
 phases:
-  pre_build:
-    commands:
-      - pip3 install awscli --upgrade --user
-      - export CODEARTIFACT_AUTH_TOKEN=`aws codeartifact get-authorization-token --domain alphaomega-repo --domain-owner 127418365645 --region us-east-1 --query authorizationToken --output text`
-      - cp ./settings.xml /root/.m2/settings.xml
+#  pre_build:
+#    commands:
+#      - pip3 install awscli --upgrade --user
+#      - export CODEARTIFACT_AUTH_TOKEN=`aws codeartifact get-authorization-token --domain alphaomega-repo --domain-owner 127418365645 --region us-east-1 --query authorizationToken --output text`
+#      - cp ./settings.xml /root/.m2/settings.xml
   build:
     commands:
-      - echo Build started on `date`
-      - ./mvnw clean install
-  post_build:
-    commands:
       - echo deploying code on `date`
+      - echo Build started on `date`
       - export CODEARTIFACT_AUTH_TOKEN=`aws codeartifact get-authorization-token --domain alphaomega-repo --domain-owner 127418365645 --region us-east-1 --query authorizationToken --output text`
       - echo '$CODEARTIFACT_AUTH_TOKEN'
-      - ./mvnw deploy
+      - mvn -s settings.xml clean package deploy
 artifacts:
   files:
     - alpha-omega-core/target/alpha-omega-core-0.0.1-SNAPSHOT.jar
