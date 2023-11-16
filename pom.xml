@@ -327,7 +327,7 @@
 
     <profiles>
         <profile>
-            <id>default</id>
+            <id>alphaomega-repo-alpha-omega-repo</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
