@@ -2,10 +2,13 @@
     <!-- https://docs.aws.amazon.com/codeartifact/latest/ug/maven-mvn.html -->
     <profiles>
         <profile>
-            <id>default</id>
+            <id>alphaomega-repo-alpha-omega-repo</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
             <repositories>
                 <repository>
-                    <id>codeartifact</id>
+                    <id>alphaomega-repo-alpha-omega-repo</id>
                     <url>https://alphaomega-repo-127418365645.d.codeartifact.us-east-1.amazonaws.com/maven/alpha-omega-repo/</url>
                 </repository>
             </repositories>
@@ -16,7 +19,7 @@
     </activeProfiles>
     <servers>
         <server>
-            <id>codeartifact</id>
+            <id>alphaomega-repo-alpha-omega-repo</id>
             <username>aws</username>
             <password>${env.CODEARTIFACT_AUTH_TOKEN}</password>
         </server>

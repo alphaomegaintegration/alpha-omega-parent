@@ -16,5 +16,4 @@ phases:
       - ./mvnw deploy
 artifacts:
   files:
-    - target/aws-build-sample-maven-project-0.0.1-SNAPSHOT.jar
     - alpha-omega-core/target/alpha-omega-core-0.0.1-SNAPSHOT.jar
