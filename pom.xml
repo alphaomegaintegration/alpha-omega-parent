@@ -33,7 +33,7 @@
 
     <modules>
         <module>alpha-omega-core</module>
-        <!--module>taptech-web-demo</module-->
+        <module>alpha-omega-security</module>
     </modules>
 
     <dependencies>
@@ -179,9 +179,9 @@
                 <artifactId>mapstruct</artifactId>
                 <version>${mapstruct.version}</version>
             </dependency>
+
         </dependencies>
     </dependencyManagement>
-
 
     <!--
     <distributionManagement>
@@ -328,16 +328,28 @@
             <name>alphaomega-repo-alpha-omega-repo</name>
             <url>https://alphaomega-repo-127418365645.d.codeartifact.us-east-1.amazonaws.com/maven/alpha-omega-repo/</url>
         </repository>
+        <!--
+        <repository>
+            <id>github</id>
+            <name>GitHub OWNER Apache Maven Packages</name>
+            <url>https://maven.pkg.github.com/alphaomegaintegration/alpha-omega-parent</url>
+        </repository>
+        -->
     </distributionManagement>
 
     <profiles>
         <profile>
             <id>alphaomega-repo-alpha-omega-repo</id>
             <activation>
-                <activeByDefault>true</activeByDefault>
+                <activeByDefault>false</activeByDefault>
             </activation>
         </profile>
-
+        <profile>
+            <id>github</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+        </profile>
         <profile>
             <id>generateJsonSchema</id>
             <activation>
