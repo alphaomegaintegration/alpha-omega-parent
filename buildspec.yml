@@ -14,7 +14,7 @@ phases:
     commands:
       - echo deploying code on `date`
       - export CODEARTIFACT_AUTH_TOKEN=`aws codeartifact get-authorization-token --domain alphaomega-repo --domain-owner 127418365645 --region us-east-1 --query authorizationToken --output text`
-      - echo using token $CODEARTIFACT_AUTH_TOKEN
+      - echo $CODEARTIFACT_AUTH_TOKEN
       - ./mvnw deploy
 artifacts:
   files:
