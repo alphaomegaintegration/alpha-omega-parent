@@ -46,11 +46,10 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: eu-west-1
+          aws-region: us-east-1
       - name: Build and publish
         run: |
           export CODEARTIFACT_AUTH_TOKEN=$(aws codeartifact get-authorization-token --region us-east-1 --domain alphaomega-repo --domain-owner 127418365645 --query authorizationToken --output text)
-          echo "$CODEARTIFACT_AUTH_TOKEN"
           ./mvnw -s settings.xml clean deploy -P alphaomega-repo-alpha-omega-repo
       
 
