@@ -51,8 +51,8 @@ jobs:
         run: |
           export CODEARTIFACT_AUTH_TOKEN=$(aws codeartifact get-authorization-token --region us-east-1 --domain alphaomega-repo --domain-owner 127418365645 --query authorizationToken --output text)
           echo "$CODEARTIFACT_AUTH_TOKEN"
-      - name: Deploy to CodeArtifact with Maven
-        run: ./mvnw -s settings.xml clean deploy -P alphaomega-repo-alpha-omega-repo
+          ./mvnw -s settings.xml clean deploy -P alphaomega-repo-alpha-omega-repo
+      
 
 
 
