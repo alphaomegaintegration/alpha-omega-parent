@@ -1,0 +1,11 @@
+https://www.pluralsight.com/resources/blog/cloud/how-to-use-github-actions-to-automate-terraform
+
+
+export CODEARTIFACT_AUTH_TOKEN=`aws codeartifact get-authorization-token --domain alphaomega-repo --domain-owner 127418365645 --region us-east-1 --query authorizationToken --output text`
+
+
+export CODEARTIFACT_AUTH_TOKEN=`aws codeartifact get-authorization-token --domain my-domain --domain-owner ${{ secrets.AWS_ACCOUNT_ID }} --query authorizationToken --output text`
+https://aws.amazon.com/blogs/containers/integrate-amazon-api-gateway-with-amazon-eks/
+
+
+https://itnext.io/manage-redis-on-aws-from-kubernetes-eeadba7eb889
