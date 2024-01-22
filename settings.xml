@@ -1,27 +1,60 @@
 <settings>
     <!-- https://docs.aws.amazon.com/codeartifact/latest/ug/maven-mvn.html -->
+    <!--
+    <activeProfiles>
+        <activeProfile>github</activeProfile>
+    </activeProfiles>
+    -->
     <profiles>
         <profile>
             <id>alphaomega-repo-alpha-omega-repo</id>
             <activation>
-                <activeByDefault>true</activeByDefault>
+                <activeByDefault>false</activeByDefault>
             </activation>
             <repositories>
                 <repository>
                     <id>alphaomega-repo-alpha-omega-repo</id>
-                    <url>https://alphaomega-repo-127418365645.d.codeartifact.us-east-1.amazonaws.com/maven/alpha-omega-repo/</url>
+                    <url>
+                        https://alphaomega-repo-127418365645.d.codeartifact.us-east-1.amazonaws.com/maven/alpha-omega-repo/
+                    </url>
+                </repository>
+            </repositories>
+        </profile>
+        <profile>
+            <id>github</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <repositories>
+                <repository>
+                    <id>central</id>
+                    <url>https://repo1.maven.org/maven2</url>
+                </repository>
+                <repository>
+                    <id>github</id>
+                    <url>https://maven.pkg.github.com/alphaomegaintegration/alpha-omega-parent</url>
+                    <snapshots>
+                        <enabled>true</enabled>
+                    </snapshots>
                 </repository>
             </repositories>
         </profile>
     </profiles>
+    <!--
     <activeProfiles>
         <activeProfile>alphaomega-repo-alpha-omega-repo</activeProfile>
     </activeProfiles>
+    -->
     <servers>
         <server>
             <id>alphaomega-repo-alpha-omega-repo</id>
             <username>aws</username>
             <password>${env.CODEARTIFACT_AUTH_TOKEN}</password>
+        </server>
+        <server>
+            <id>github</id>
+            <username>glawson6-ao</username>
+            <password>${env.GITHUB_AUTH_TOKEN</password>
         </server>
     </servers>
 </settings>

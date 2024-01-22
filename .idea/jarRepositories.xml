@@ -7,6 +7,11 @@
       <option name="url" value="https://repo.maven.apache.org/maven2" />
     </remote-repository>
     <remote-repository>
+      <option name="id" value="alphaomega-repo-alpha-omega-repo" />
+      <option name="name" value="alphaomega-repo-alpha-omega-repo" />
+      <option name="url" value="https://alphaomega-repo-127418365645.d.codeartifact.us-east-1.amazonaws.com/maven/alpha-omega-repo/" />
+    </remote-repository>
+    <remote-repository>
       <option name="id" value="central" />
       <option name="name" value="Maven Central repository" />
       <option name="url" value="https://repo1.maven.org/maven2" />

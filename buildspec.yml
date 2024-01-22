@@ -1,9 +1,10 @@
 version: 0.2
 
 phases:
-#  install:
-#    runtime-versions:
-#      java: corretto11
+  install:
+    runtime-versions:
+      java: corretto17
+      # https://docs.aws.amazon.com/codebuild/latest/userguide/use-codebuild-agent.html
 #  pre_build:
 #    commands:
 #      - pip3 install awscli --upgrade --user

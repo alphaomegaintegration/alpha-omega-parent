@@ -1,0 +1,881 @@
+openapi: 3.0.1
+info:
+  title: gsa-rapid-challenge-api
+  version: v0
+servers:
+- url: http://localhost:8080
+  description: Generated server url
+tags:
+- name: analyses
+  description: the analyses API
+paths:
+  /analyses/travel/report:
+    get:
+      tags:
+      - analyses
+      - TravelReports
+      summary: gets travel reports
+      operationId: getTravelReports
+      parameters:
+      - name: cities
+        in: query
+        description: What page to grab
+        required: false
+        schema:
+          type: string
+      - name: page
+        in: query
+        description: What page to grab
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      - name: pageSize
+        in: query
+        description: Number of elements on page
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 25
+      - name: direction
+        in: query
+        description: Sort order direction
+        required: false
+        schema:
+          type: string
+          default: ASC
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TravelReportPage'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TravelReportPage'
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TravelReportPage'
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TravelReportPage'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TravelReportPage'
+    post:
+      tags:
+      - analyses
+      - TravelReports
+      summary: creates travel reports
+      operationId: createTravelReport
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TravelReportRequest'
+        required: true
+      responses:
+        "202":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TravelReportRequest'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TravelReportRequest'
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TravelReportRequest'
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TravelReportRequest'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TravelReportRequest'
+  /analyses/travel/report/{id}:
+    get:
+      tags:
+      - analyses
+      - TravelApprovals
+      summary: gets travel approvals
+      operationId: getTravelReportById
+      parameters:
+      - name: id
+        in: path
+        description: What page to grab
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TravelReport'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TravelReport'
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TravelReport'
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TravelReport'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TravelReport'
+    patch:
+      tags:
+      - analyses
+      - TravelReports
+      summary: creates travel reports
+      operationId: updateTravelReport
+      parameters:
+      - name: id
+        in: path
+        description: What page to grab
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TravelReportStatusUpdate'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TravelReport'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TravelReport'
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TravelReport'
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TravelReport'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TravelReport'
+  /analyses/report/approvals:
+    get:
+      tags:
+      - analyses
+      - TravelApprovals
+      summary: gets travel approvals
+      operationId: getApprovalRequest
+      parameters:
+      - name: approverId
+        in: query
+        description: approverId for approvals
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TravelReportPage'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TravelReportPage'
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TravelReportPage'
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TravelReportPage'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TravelReportPage'
+    patch:
+      tags:
+      - analyses
+      - TravelReports
+      summary: creates travel reports
+      operationId: updateTravelApproval
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TravelReportStatusUpdate'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TravelReport'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TravelReport'
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TravelReport'
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TravelReport'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TravelReport'
+  /analyses/travel/origins:
+    get:
+      tags:
+      - analyses
+      - TravelCities
+      summary: gets all contexts
+      operationId: getTravelOrigins
+      parameters:
+      - name: cities
+        in: query
+        description: What page to grab
+        required: false
+        schema:
+          type: string
+      - name: page
+        in: query
+        description: What page to grab
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      - name: pageSize
+        in: query
+        description: Number of elements on page
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 25
+      - name: direction
+        in: query
+        description: Sort order direction
+        required: false
+        schema:
+          type: string
+          default: ASC
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TravelLocationPage'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TravelLocationPage'
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TravelLocationPage'
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TravelLocationPage'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TravelLocationPage'
+  /analyses/travel/fares:
+    get:
+      tags:
+      - analyses
+      - TravelCities
+      summary: gets all contexts
+      operationId: getAllTravelFares
+      parameters:
+      - name: cities
+        in: query
+        description: What page to grab
+        required: false
+        schema:
+          type: string
+      - name: page
+        in: query
+        description: What page to grab
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      - name: pageSize
+        in: query
+        description: Number of elements on page
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 25
+      - name: direction
+        in: query
+        description: Sort order direction
+        required: false
+        schema:
+          type: string
+          default: ASC
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TravelFarePage'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TravelFarePage'
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TravelFarePage'
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TravelFarePage'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TravelFarePage'
+  /analyses/travel/destinations:
+    get:
+      tags:
+      - analyses
+      - TravelCities
+      summary: gets all contexts
+      operationId: getTravelDestinations
+      parameters:
+      - name: cities
+        in: query
+        description: What page to grab
+        required: false
+        schema:
+          type: string
+      - name: page
+        in: query
+        description: What page to grab
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      - name: pageSize
+        in: query
+        description: Number of elements on page
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 25
+      - name: direction
+        in: query
+        description: Sort order direction
+        required: false
+        schema:
+          type: string
+          default: ASC
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TravelLocationPage'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TravelLocationPage'
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TravelLocationPage'
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TravelLocationPage'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TravelLocationPage'
+  /analyses/travel:
+    get:
+      tags:
+      - analyses
+      - TravelCities
+      summary: gets all contexts
+      operationId: getAllTravel
+      parameters:
+      - name: cities
+        in: query
+        description: What page to grab
+        required: false
+        schema:
+          type: string
+      - name: page
+        in: query
+        description: What page to grab
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      - name: pageSize
+        in: query
+        description: Number of elements on page
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 25
+      - name: direction
+        in: query
+        description: Sort order direction
+        required: false
+        schema:
+          type: string
+          default: ASC
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TravelLocationPage'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TravelLocationPage'
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TravelLocationPage'
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TravelLocationPage'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TravelLocationPage'
+components:
+  schemas:
+    TravelCityPersons:
+      type: object
+      properties:
+        originCityStateAirportCode:
+          type: string
+        originCityName:
+          type: string
+        personCount:
+          type: number
+    TravelLocation:
+      type: object
+      properties:
+        id:
+          type: string
+        cityStateAirportCode:
+          type: string
+        airportCode:
+          type: string
+        cityName:
+          type: string
+        cityCode:
+          type: string
+        isDestination:
+          type: boolean
+        isOrigination:
+          type: boolean
+    TravelReportRequest:
+      type: object
+      properties:
+        id:
+          type: string
+        correlationId:
+          type: string
+        travelReportId:
+          type: string
+        travelCityPersonsItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/TravelCityPersons'
+        destinationLocationItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/TravelLocation'
+        requestorEmail:
+          type: string
+        approverEmail:
+          type: string
+        status:
+          type: string
+        createdTime:
+          type: string
+    TravelAnalysis:
+      type: object
+      properties:
+        id:
+          type: string
+        correlationId:
+          type: string
+        travelReportId:
+          type: string
+        destinationCityName:
+          type: string
+        destinationCityStateAirportCode:
+          type: string
+        analysisItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/TravelAnalysisItem'
+        status:
+          type: string
+        analysisTotal:
+          type: number
+        requestorEmail:
+          type: string
+        approverEmail:
+          type: string
+        approvalTime:
+          type: string
+        createdTime:
+          type: string
+    TravelAnalysisItem:
+      type: object
+      properties:
+        id:
+          type: string
+        originCityStateAirportCode:
+          type: string
+        destinationCityStateAirportCode:
+          type: string
+        personCount:
+          type: number
+        personFare:
+          type: number
+        personTravelTotal:
+          type: number
+    TravelReport:
+      type: object
+      properties:
+        id:
+          type: string
+        correlationId:
+          type: string
+        travelReportId:
+          type: string
+        reportItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/TravelAnalysis'
+        status:
+          type: string
+        requestorEmail:
+          type: string
+        createdTime:
+          type: string
+    TravelReportStatusUpdate:
+      type: object
+      properties:
+        correlationId:
+          type: string
+        status:
+          type: string
+        analysisId:
+          type: string
+        reportId:
+          type: string
+        approverEmail:
+          type: string
+        requestorEmail:
+          type: string
+    UiConfiguration:
+      type: object
+      properties:
+        deepLinking:
+          type: boolean
+        displayOperationId:
+          type: boolean
+        defaultModelsExpandDepth:
+          type: integer
+          format: int32
+        defaultModelExpandDepth:
+          type: integer
+          format: int32
+        defaultModelRendering:
+          type: string
+          enum:
+          - example
+          - model
+        displayRequestDuration:
+          type: boolean
+        docExpansion:
+          type: string
+          enum:
+          - none
+          - list
+          - full
+        filter:
+          type: object
+        maxDisplayedTags:
+          type: integer
+          format: int32
+        operationsSorter:
+          type: string
+          enum:
+          - alpha
+          - method
+        showExtensions:
+          type: boolean
+        showCommonExtensions:
+          type: boolean
+        tagsSorter:
+          type: string
+          enum:
+          - alpha
+        validatorUrl:
+          type: string
+        supportedSubmitMethods:
+          type: array
+          items:
+            type: string
+        swaggerBaseUiUrl:
+          type: string
+    SecurityConfiguration:
+      type: object
+      properties:
+        apiKey:
+          type: string
+          deprecated: true
+        apiKeyVehicle:
+          type: string
+          deprecated: true
+        apiKeyName:
+          type: string
+          deprecated: true
+        clientId:
+          type: string
+        clientSecret:
+          type: string
+        realm:
+          type: string
+        appName:
+          type: string
+        scopeSeparator:
+          type: string
+        additionalQueryStringParams:
+          type: object
+          additionalProperties:
+            type: object
+        useBasicAuthenticationWithAccessCodeGrant:
+          type: boolean
+        enableCsrfSupport:
+          type: boolean
+    SwaggerResource:
+      type: object
+      properties:
+        name:
+          type: string
+        url:
+          type: string
+        swaggerVersion:
+          type: string
+        location:
+          type: string
+          deprecated: true
+    TravelReportPage:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/TravelReport'
+        elapsed:
+          type: string
+        correlationId:
+          type: string
+        page:
+          type: integer
+          format: int32
+        pageSize:
+          type: integer
+          format: int32
+        total:
+          type: integer
+          format: int32
+    TravelLocationPage:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/TravelLocation'
+        elapsed:
+          type: string
+        correlationId:
+          type: string
+        page:
+          type: integer
+          format: int32
+        pageSize:
+          type: integer
+          format: int32
+        total:
+          type: integer
+          format: int32
+    TravelFare:
+      type: object
+      properties:
+        id:
+          type: string
+        originCityStateAirportCode:
+          type: string
+        destinationCityStateAirportCode:
+          type: string
+        paxCount:
+          type: number
+        ycaFare:
+          type: number
+        caFare:
+          type: number
+        businessFare:
+          type: number
+        cpFare:
+          type: number
+    TravelFarePage:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/TravelFare'
+        elapsed:
+          type: string
+        correlationId:
+          type: string
+        page:
+          type: integer
+          format: int32
+        pageSize:
+          type: integer
+          format: int32
+        total:
+          type: integer
+          format: int32

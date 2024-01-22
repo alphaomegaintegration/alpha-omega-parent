@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: echoserver
+  namespace: echoserver
+  annotations:
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+    #alb.ingress.kubernetes.io/subnets: subnet-05bb74f8e7bd8cb24, subnet-0dd23f8a427290944
+    alb.ingress.kubernetes.io/tags: Environment=dev,Team=test
+    kubernetes.io/ingress.class: alb
+    external-dns.alpha.kubernetes.io/hostname: echoserver.aoi-test.com
+spec:
+  ingressClassName: alb
+  rules:
+    - http:
+        paths:
+          - path: /
+            pathType: Exact
+            backend:
+              service:
+                name: echoserver
+                port:
+                  number: 80

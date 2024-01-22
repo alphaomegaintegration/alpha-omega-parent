@@ -1,0 +1,66 @@
+{
+    "cluster": {
+        "name": "eks-ack-apigw-rapid",
+        "arn": "arn:aws:eks:us-east-1:127418365645:cluster/eks-ack-apigw-rapid",
+        "createdAt": "2023-12-05T22:25:21.138000-05:00",
+        "version": "1.27",
+        "endpoint": "https://FCEBFEE36D6B517BD0AA6A2DCFDCB2C6.gr7.us-east-1.eks.amazonaws.com",
+        "roleArn": "arn:aws:iam::127418365645:role/eksctl-eks-ack-apigw-rapid-cluster-ServiceRole-bszoNaMCUrrs",
+        "resourcesVpcConfig": {
+            "subnetIds": [
+                "subnet-02650cbfe620d8d35",
+                "subnet-0ba3db5e36525b84d",
+                "subnet-0197d10ca32ab58de",
+                "subnet-0c3e0669a29b87c42"
+            ],
+            "securityGroupIds": [
+                "sg-0dcc36f92bb59debd"
+            ],
+            "clusterSecurityGroupId": "sg-07a2a98c2d43bfe89",
+            "vpcId": "vpc-072eae8c91f090eaa",
+            "endpointPublicAccess": true,
+            "endpointPrivateAccess": false,
+            "publicAccessCidrs": [
+                "0.0.0.0/0"
+            ]
+        },
+        "kubernetesNetworkConfig": {
+            "serviceIpv4Cidr": "10.100.0.0/16",
+            "ipFamily": "ipv4"
+        },
+        "logging": {
+            "clusterLogging": [
+                {
+                    "types": [
+                        "api",
+                        "audit",
+                        "authenticator",
+                        "controllerManager",
+                        "scheduler"
+                    ],
+                    "enabled": false
+                }
+            ]
+        },
+        "identity": {
+            "oidc": {
+                "issuer": "https://oidc.eks.us-east-1.amazonaws.com/id/FCEBFEE36D6B517BD0AA6A2DCFDCB2C6"
+            }
+        },
+        "status": "ACTIVE",
+        "certificateAuthority": {
+            "data": "LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURCVENDQWUyZ0F3SUJBZ0lJQWdJVFZOTVR0RXd3RFFZSktvWklodmNOQVFFTEJRQXdGVEVUTUJFR0ExVUUKQXhNS2EzVmlaWEp1WlhSbGN6QWVGdzB5TXpFeU1EWXdNekkxTVRWYUZ3MHpNekV5TURNd016TXdNVFZhTUJVeApFekFSQmdOVkJBTVRDbXQxWW1WeWJtVjBaWE13Z2dFaU1BMEdDU3FHU0liM0RRRUJBUVVBQTRJQkR3QXdnZ0VLCkFvSUJBUURDUlIvWHVvUUxEWU5hbDJtc0FGa2lRb084Q1lPTVQ0ZzBjZjVKZkZwS1B1aE9mRDR6UGVKOXU5UXgKeEY1ckVQbWNSK3RZdVJianlUZEs3anZuT0dXVzQ5UXZUZXlBaWRkdzlUOHo1VkxrR2dDbkFaY09hUlFrVnVTdgozemQrVE5DMlN1aktOUXcxeE1QV3loQXo3OTBnVzhOaUxTdHVEOHR2UmhNNmE5V2F4U2pMRUN6eGg1ZnVMNWQ2CktFSyt5MzRWMFF4TWt5SlI4TjdCQWQvQjlUelEwd1huR3BOUm11RnJIcFNERTFsWGFIMnVTakxFN2I2MGxLR3cKeUVSMU1hckJsaEl5R1FnUFBYbkdYbnpiYXh0NFlFWUdJZUVyQXYwenB6RFFxZk1xOUNoYnJ4Wld0c2dTUzAzUQoxc2tQdjZsbW1BV21PNFdVTFFnRlNlZG5CaVIxQWdNQkFBR2pXVEJYTUE0R0ExVWREd0VCL3dRRUF3SUNwREFQCkJnTlZIUk1CQWY4RUJUQURBUUgvTUIwR0ExVWREZ1FXQkJSR3JnN0FWNUFhKzhwamR5M1k2OTVXU0tRM256QVYKQmdOVkhSRUVEakFNZ2dwcmRXSmxjbTVsZEdWek1BMEdDU3FHU0liM0RRRUJDd1VBQTRJQkFRQTZadGZyMkxHMQpQRkRWcFRxT0x2SklDbWticG5SVmlVN0dMSUhYSHAwQnVET1krT1FHRzFqN1J4V2doTlBhcHFhUFYwR2tXZG1lCjFxQ0EwUmpEODlFSzhZV3RhaVJXVFBoYURLU1BkYlNDMG1UbTZPREg1bEZ0K0IwbkJjRkwyNndVYVZXaGx1T3YKKzIrUGE0WXo1amZRTlovVWpqdzMvT295amRveGhmYnAzUDBsMmdsWWlDRUhuVWk2djV4UkZFOGNQR1llRC9wMgpWVVpDeGdvcjk4T3F5bVBRVG15bGpXQXlUY2NwNFFINDdIVEFFWUNkQkZ6RlR5NWNDQTJOUEdoV1E1VkxQZUhKCmxhV2EzNjBkSlFoclRyMEkvTHc2TWxNTGJpeXJzWFg4UVZacEFPU1VUSWhGTHFqZ2NlNmltWTd0VGlwSGRsVVQKQjRVcVRaeTJLTjVsCi0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K"
+        },
+        "platformVersion": "eks.8",
+        "tags": {
+            "aws:cloudformation:stack-name": "eksctl-eks-ack-apigw-rapid-cluster",
+            "alpha.eksctl.io/cluster-name": "eks-ack-apigw-rapid",
+            "aws:cloudformation:stack-id": "arn:aws:cloudformation:us-east-1:127418365645:stack/eksctl-eks-ack-apigw-rapid-cluster/06df25c0-93e7-11ee-a288-0a4d3276f54b",
+            "eksctl.cluster.k8s.io/v1alpha1/cluster-name": "eks-ack-apigw-rapid",
+            "alpha.eksctl.io/cluster-oidc-enabled": "true",
+            "aws:cloudformation:logical-id": "ControlPlane",
+            "alpha.eksctl.io/eksctl-version": "0.165.0",
+            "Name": "eksctl-eks-ack-apigw-rapid-cluster/ControlPlane"
+        }
+    }
+}
