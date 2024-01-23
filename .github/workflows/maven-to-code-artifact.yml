@@ -19,7 +19,7 @@ on:
 
 jobs:
 
-  maven-to-code-artifact:
+  code-artifact:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

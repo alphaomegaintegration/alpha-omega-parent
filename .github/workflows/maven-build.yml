@@ -16,6 +16,32 @@ jobs:
           cache: maven
       - name: Install with Maven
         run: ./mvnw clean install
+
+  code-artifact:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
+      - uses: aws-actions/setup-sam@v1
+      - uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+      - name: Build and publish
+        run: |
+          export CODEARTIFACT_AUTH_TOKEN=$(aws codeartifact get-authorization-token --region us-east-1 --domain alphaomega-repo --domain-owner 127418365645 --query authorizationToken --output text)
+          ./mvnw -s settings.xml clean deploy -P alphaomega-repo-alpha-omega-repo
+
+
+
+
+
   maven-to-code-artifact:
     runs-on: ubuntu-latest
     steps:
@@ -26,7 +52,7 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
           cache: maven
-      - uses: alphaomegaintegration/alpha-omega-parent/.github/workflows/maven-to-code-artifact.yml
+      - uses: alphaomegaintegration/alpha-omega-parent/.github/workflows/code-artifact.yml@main
         with:
           domain-owner: ${{env.AWS_REPO_DOMAIN_OWNER}}
           domain: ${{env.AWS_REPO_DOMAIN}}
