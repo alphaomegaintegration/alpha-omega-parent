@@ -1,6 +1,6 @@
 package com.alpha.omega.batch;
 
-import com.unhrc.bims.Constants;
+import com.alpha.omega.core.Constants;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;

@@ -16,6 +16,7 @@
     <description>alpha-omega-parent</description>
     <properties>
         <java.version>17</java.version>
+        <aws.java.sdk.version>2.23.20</aws.java.sdk.version>
         <spring-cloud.version>2022.0.4</spring-cloud.version>
         <spring-data-bom-version>2022.0.4</spring-data-bom-version>
         <spring.security.bom.version>6.1.3</spring.security.bom.version>
@@ -29,12 +30,15 @@
         <maven.surefire.plugin.version>3.0.0-M7</maven.surefire.plugin.version>
         <gmaven-plus.plugin.version>3.0.0</gmaven-plus.plugin.version>
         <maven.surefire.plugin.version>3.0.0-M7</maven.surefire.plugin.version>
+        <mapstruct.version>1.5.5.Final</mapstruct.version>
     </properties>
 
     <modules>
         <module>alpha-omega-core</module>
         <module>alpha-omega-cache</module>
+        <module>alpha-omega-batch</module>
         <module>alpha-omega-security</module>
+        <module>alpha-omega-aws</module>
     </modules>
 
     <dependencies>
@@ -201,7 +205,13 @@
                 <artifactId>mapstruct</artifactId>
                 <version>${mapstruct.version}</version>
             </dependency>
-
+            <dependency>
+                <groupId>software.amazon.awssdk</groupId>
+                <artifactId>bom</artifactId>
+                <version>${aws.java.sdk.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
