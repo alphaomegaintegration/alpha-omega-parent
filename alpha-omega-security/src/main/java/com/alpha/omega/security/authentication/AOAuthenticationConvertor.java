@@ -1,19 +1,22 @@
 package com.alpha.omega.security.authentication;
 
+import com.alpha.omega.cache.DefaultObjectMapperFactory;
+import com.alpha.omega.cache.ObjectMapperFactory;
+import com.alpha.omega.security.exception.AOAuthenticationException;
+import com.alpha.omega.security.model.UserProfile;
+import com.alpha.omega.security.token.AOClaims;
+import com.alpha.omega.security.token.TokenIssuerClaimsMapperService;
+import com.alpha.omega.security.utils.AOSecurityProperties;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import com.enterprise.pwc.datalabs.caching.DefaultObjectMapperFactory;
-import com.enterprise.pwc.datalabs.caching.ObjectMapperFactory;
-import com.enterprise.pwc.datalabs.security.PwcSecurityProperties;
-import com.enterprise.pwc.datalabs.security.token.PwcClaims;
-import com.enterprise.pwc.datalabs.security.token.issuer.TokenIssuerClaimsMapperService;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.pwc.base.exceptions.auth.PwcAuthenticationException;
-import com.pwc.base.model.UserProfile;
-import com.pwc.base.utils.BaseUtil;
 import jakarta.servlet.http.HttpServletRequest;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -28,9 +31,14 @@ import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import static com.enterprise.pwc.datalabs.security.token.PwcClaims.*;
-import static com.pwc.base.utils.BaseConstants.*;
+import static com.alpha.omega.core.Constants.*;
+import static com.alpha.omega.security.token.AOClaims.*;
+import static com.alpha.omega.security.utils.AOSecurityUtils.parseBasicAuthString;
+import static org.apache.kafka.common.security.JaasUtils.SERVICE_NAME;
 
+@SuperBuilder
+@NoArgsConstructor
+@AllArgsConstructor
 public class AOAuthenticationConvertor implements AuthenticationConverter {
 
 	public static final String NO_ISS_CLAIM = "No iss claim!";
@@ -40,32 +48,26 @@ public class AOAuthenticationConvertor implements AuthenticationConverter {
 	private AuthenticationDetailsSource<HttpServletRequest, ?> authenticationDetailsSource;
 
 	private Charset credentialsCharset = StandardCharsets.UTF_8;
-	private PwcSecurityProperties pwcSecurityProperties;
+	private AOSecurityProperties aoSecurityProperties;
 
 	private HttpServletRequestToRequestMap httpServletRequestToRequestMap = new HttpServletRequestToRequestMap();
-
 	private TokenIssuerClaimsMapperService claimsMapperService;
 
-	public AOAuthenticationConvertor(PwcSecurityProperties pwcSecurityProperties, TokenIssuerClaimsMapperService claimsMapperService) {
-		this.pwcSecurityProperties = pwcSecurityProperties;
-		this.claimsMapperService = claimsMapperService;
-	}
 
-	protected static final List<String> CONVERSION_HEADERS = Arrays.asList(PRINCIPAL, SERVICE_NAME, IDENTITY_PROVIDER, IDENTITY_PROVIDER,
-			ENGAGEMENT_ID, CORRELATION_ID, CONTEXT_ID, HttpHeaders.AUTHORIZATION, WORKSPACE_ID);
+	protected static final List<String> CONVERSION_HEADERS = Arrays.asList(PRINCIPAL, SERVICE_NAME, IDENTITY_PROVIDER, IDENTITY_PROVIDER, CORRELATION_ID, CONTEXT_ID, HttpHeaders.AUTHORIZATION);
 
 	@Override
 	public Authentication convert(HttpServletRequest request) {
 
 		Map<String, Object> requestMap = httpServletRequestToRequestMap.apply(request);
-		PreAuthenticationPrincipal principalAuth = requestMapToPreAuthenticationPrincipal(pwcSecurityProperties, objectMapper, claimsMapperService).apply(requestMap);
+		PreAuthenticationPrincipal principalAuth = requestMapToPreAuthenticationPrincipal(aoSecurityProperties, objectMapper, claimsMapperService).apply(requestMap);
 		((UserProfile) principalAuth.getPrincipal()).setAdditionalMetaData(convertRequestHeadersToMap(request));
 		return principalAuth;
 	}
 
 	private static String extractFromBasicAuthHeader(String authorization) {
 		try {
-			return BaseUtil.parseBasicAuthString(authorization)._1();
+			return parseBasicAuthString(authorization).getT1();
 		} catch (Exception e) {
 			logger.warn("Could not extract guid ", e);
 			return null;
@@ -105,7 +107,7 @@ public class AOAuthenticationConvertor implements AuthenticationConverter {
 		}
 	}
 
-	public static Function<Map<String, Object>, PreAuthenticationPrincipal> requestMapToPreAuthenticationPrincipal(final PwcSecurityProperties pwcSecurityProperties,
+	public static Function<Map<String, Object>, PreAuthenticationPrincipal> requestMapToPreAuthenticationPrincipal(final AOSecurityProperties aoSecurityProperties,
 																												   ObjectMapper objectMapper,
 																												   TokenIssuerClaimsMapperService claimsMapperService) {
 
@@ -116,12 +118,11 @@ public class AOAuthenticationConvertor implements AuthenticationConverter {
 			final String serviceName = (String) requestMap.get(SERVICE_NAME);
 			final String identityProvider = (String) requestMap.get(IDENTITY_PROVIDER);
 			final String refreshToken = (String) requestMap.get(REFRESH_TOKEN_HEADER);
-			final String engagementId = (String) requestMap.get(ENGAGEMENT_ID);
 			final String correlationId = (String) requestMap.get(CORRELATION_ID);
 			String contextId = (String) requestMap.get(CONTEXT_ID);
 
-			if (StringUtils.isBlank(contextId) && pwcSecurityProperties.isUseDefaultContextId()) {
-				contextId = pwcSecurityProperties.getDefaultContextId();
+			if (StringUtils.isBlank(contextId) && aoSecurityProperties.isUseDefaultContextId()) {
+				contextId = aoSecurityProperties.getDefaultContextId();
 			}
 
 			UserProfile userProfile = UserProfile.builder()
@@ -131,13 +132,12 @@ public class AOAuthenticationConvertor implements AuthenticationConverter {
 					.identityProvider(identityProvider)
 					//.additionalMetaData(convertRequestHeadersToMap(request))
 					.contextId(contextId)
-					.engagementId(engagementId)
 					.correlationId(correlationId)
 					.build();
 
 			String completeAuthHeader = null;
 			if (StringUtils.isBlank(authorization)) {
-				throw new PwcAuthenticationException("No authorization header!");
+				throw new AOAuthenticationException("No authorization header!");
 			}
 
 			DecodedJWT decodedJWT = null;
@@ -155,7 +155,7 @@ public class AOAuthenticationConvertor implements AuthenticationConverter {
 
 			userProfile = updateUserProfile(principal, userProfile, objectMapper);
 
-			logger.trace("userProfile [{}] in PwcAuthenticationConvertor", userProfile);
+			logger.trace("userProfile [{}] in aoAuthenticationConvertor", userProfile);
 
 			PreAuthenticationPrincipal authPrincipal = decodedJWT != null ? new PreAuthenticationPrincipal(userProfile, completeAuthHeader, decodedJWT, serviceName)
 					: new PreAuthenticationPrincipal(userProfile, completeAuthHeader, serviceName);
@@ -167,7 +167,7 @@ public class AOAuthenticationConvertor implements AuthenticationConverter {
 	private static UserProfile fromBasicAuthHeader(String authorization, UserProfile userProfileP) {
 		try {
 
-			String guid = BaseUtil.parseBasicAuthString(authorization)._1();
+			String guid = parseBasicAuthString(authorization).getT1();
 			return userProfileP.toBuilder().name(guid).build();
 		} catch (Exception e) {
 			logger.warn("Could not extract guid ", e);
@@ -176,7 +176,7 @@ public class AOAuthenticationConvertor implements AuthenticationConverter {
 	}
 
 
-	static Optional<String> extractPwcguid(String completeAuthHeader) {
+	static Optional<String> extractUserId(String completeAuthHeader) {
 
 		String guidClaimStr = null;
 		DecodedJWT decodedJWT = null;
@@ -185,14 +185,14 @@ public class AOAuthenticationConvertor implements AuthenticationConverter {
 		try {
 			decodedJWT = JWT.decode(completeAuthHeader);
 		} catch (Exception ex) {
-			logger.warn("Could not extract pwcguid from token");
+			logger.warn("Could not extract userId from token");
 		}
 
 		if (decodedJWT != null) {
 			Map<String, Claim> claims = decodedJWT.getClaims();
 
 			//subject is 'External'
-			if (claims.containsKey(PWC_USER_TYPE) && EXTERNAL.equalsIgnoreCase(claims.get(PWC_USER_TYPE).asString())) {
+			if (claims.containsKey(AO_USER_TYPE) && EXTERNAL.equalsIgnoreCase(claims.get(AO_USER_TYPE).asString())) {
 				guidClaim = claims.containsKey(EMAIL) ? claims.get(EMAIL) : claims.get(PREFERRED_MAIL);
 				//return Optional.ofNullable(guidClaim.asString());
 			} else {
@@ -216,7 +216,7 @@ public class AOAuthenticationConvertor implements AuthenticationConverter {
 		UserProfile userProfile = userProfileP.toBuilder().build();
 		if (jsonNode.isPresent()) {
 			JsonNode jn = jsonNode.get();
-			JsonNode pwcguidNd = jn.findValue("guid");
+			JsonNode userGuid = jn.findValue("guid");
 			JsonNode firstNameNd = jn.findValue("firstName");
 			JsonNode lastNameNd = jn.findValue("lastName");
 			JsonNode countryCodeNd = jn.findValue("country");
@@ -237,8 +237,8 @@ public class AOAuthenticationConvertor implements AuthenticationConverter {
 				userProfile.setEmail(!emailNd.isNull() ? emailNd.asText(EMPTY_STR) : EMPTY_STR);
 			}
 
-			if (!pwcguidNd.isNull() && StringUtils.isBlank(userProfile.getName())) {
-				userProfile.setName(pwcguidNd.asText());
+			if (!userGuid.isNull() && StringUtils.isBlank(userProfile.getName())) {
+				userProfile.setName(userGuid.asText());
 			}
 
 		}
@@ -248,27 +248,29 @@ public class AOAuthenticationConvertor implements AuthenticationConverter {
 	static UserProfile fromDecodedJwt(DecodedJWT decodedJWT, TokenIssuerClaimsMapperService claimsService, UserProfile userProfile) {
 		String issuer = decodedJWT.getClaim(ISS).asString();
 		if (StringUtils.isBlank(issuer)) {
-			throw new PwcAuthenticationException(NO_ISS_CLAIM);
+			throw new AOAuthenticationException(NO_ISS_CLAIM);
 		}
+
 		Map<String, String> issuerClaimMap = claimsService.issuerClaimsMap(issuer);
 		if (issuerClaimMap == null || issuerClaimMap.isEmpty()) {
-			issuerClaimMap = TokenIssuerClaimsMapperService.PWC_IDENTITY_STANDARD_CLAIMS_MAP;
+			issuerClaimMap = TokenIssuerClaimsMapperService.AO_IDENTITY_STANDARD_CLAIMS_MAP;
 		}
+
 		Map<String, Claim> claims = decodedJWT.getClaims();
 		logger.debug("UserProfile fromDecodedJwt Using issuerClaimMap => {}", issuerClaimMap);
 
 		Claim guid = null;
-		if (claims.containsKey(PWC_USER_TYPE) && EXTERNAL.equalsIgnoreCase(claims.get(PWC_USER_TYPE).asString())) {
+		if (claims.containsKey(AO_USER_TYPE) && EXTERNAL.equalsIgnoreCase(claims.get(AO_USER_TYPE).asString())) {
 			guid = claims.containsKey(EMAIL) ? claims.get(EMAIL) : claims.get(PREFERRED_MAIL);
 
 		} else {
-			guid = decodedJWT.getClaim(issuerClaimMap.get(PwcClaims.GUID));
+			guid = decodedJWT.getClaim(issuerClaimMap.get(AOClaims.GUID));
 		}
 
-		//Claim guid = decodedJWT.getClaim(issuerClaimMap.get(PwcClaims.GUID));
+		//Claim guid = decodedJWT.getClaim(issuerClaimMap.get(aoClaims.GUID));
 		Claim email = decodedJWT.getClaim(issuerClaimMap.get(EMAIL));
-		Claim firstName = decodedJWT.getClaim(issuerClaimMap.get(PwcClaims.FIRST_NAME));
-		Claim lastName = decodedJWT.getClaim(issuerClaimMap.get(PwcClaims.LAST_NAME));
+		Claim firstName = decodedJWT.getClaim(issuerClaimMap.get(AOClaims.FIRST_NAME));
+		Claim lastName = decodedJWT.getClaim(issuerClaimMap.get(AOClaims.LAST_NAME));
 		Claim country = decodedJWT.getClaim(issuerClaimMap.get(COUNTRY_CODE));
 
 		return userProfile.toBuilder()

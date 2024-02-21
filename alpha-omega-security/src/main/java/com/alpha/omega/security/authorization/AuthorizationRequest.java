@@ -1,6 +1,7 @@
 package com.alpha.omega.security.authorization;
 
-import com.enterprise.pwc.datalabs.caching.CacheControl;
+
+import com.alpha.omega.cache.CacheControl;
 
 public class AuthorizationRequest {
 

@@ -1,10 +1,10 @@
 package com.alpha.omega.security.authentication;
 
-import com.enterprise.pwc.datalabs.caching.DefaultObjectMapperFactory;
-import com.enterprise.pwc.datalabs.caching.ObjectMapperFactory;
-import com.enterprise.pwc.datalabs.security.response.DefaultPwcSecurityResponseExceptionFactory;
-import com.enterprise.pwc.datalabs.security.response.PwcSecurityResponse;
-import com.enterprise.pwc.datalabs.security.response.PwcSecurityResponseExceptionFactory;
+import com.alpha.omega.cache.DefaultObjectMapperFactory;
+import com.alpha.omega.cache.ObjectMapperFactory;
+import com.alpha.omega.security.response.AOSecurityResponse;
+import com.alpha.omega.security.response.AOSecurityResponseExceptionFactory;
+import com.alpha.omega.security.response.DefaultAOSecurityResponseExceptionFactory;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -20,9 +20,9 @@ public class AOSecurityEntryPoint implements AuthenticationEntryPoint {
 	private static Logger logger = LogManager.getLogger(AOSecurityEntryPoint.class);
 
 	private ObjectMapper objectMapper = new DefaultObjectMapperFactory().createObjectMapper(ObjectMapperFactory.Scope.PROTOTYPE);
-	private PwcSecurityResponseExceptionFactory responseExceptionFactory = new DefaultPwcSecurityResponseExceptionFactory();
+	private AOSecurityResponseExceptionFactory responseExceptionFactory = new DefaultAOSecurityResponseExceptionFactory();
 
-	public AOSecurityEntryPoint(PwcSecurityResponseExceptionFactory responseExceptionFactory) {
+	public AOSecurityEntryPoint(AOSecurityResponseExceptionFactory responseExceptionFactory) {
 		this.responseExceptionFactory = responseExceptionFactory;
 	}
 
@@ -36,9 +36,9 @@ public class AOSecurityEntryPoint implements AuthenticationEntryPoint {
 		logger.debug("handleResponse with exception => {}",exception.getClass().getName());
 		HttpHeaders httpHeaders = new HttpHeaders();
 		response.setHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
-		PwcSecurityResponse securityResponse = responseExceptionFactory.createPwcSecurityResponse(exception, httpHeaders);
+		AOSecurityResponse securityResponse = responseExceptionFactory.createAOSecurityResponse(exception, httpHeaders);
 
-		logger.trace("PwcSecurityResponse => {}",securityResponse);
+		logger.trace("aoSecurityResponse => {}",securityResponse);
 		response.setStatus(securityResponse.getStatus().value());
 		response.getWriter().print(objectMapper.writeValueAsString(securityResponse));
 		response.flushBuffer();

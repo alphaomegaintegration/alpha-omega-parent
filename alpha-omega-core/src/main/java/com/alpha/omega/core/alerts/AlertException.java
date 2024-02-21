@@ -1,4 +1,4 @@
-package com.pwc.base.alerts;
+package com.alpha.omega.core.alerts;
 
 public class AlertException extends RuntimeException{
 

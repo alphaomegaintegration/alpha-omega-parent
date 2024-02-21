@@ -1,12 +1,10 @@
 package com.alpha.omega.security.context;
 
-import com.enterprise.pwc.datalabs.caching.CacheDao;
-import com.enterprise.pwc.datalabs.caching.expiration.Expiration;
-import com.enterprise.pwc.datalabs.security.authentication.UserProfileAuthentication;
-import com.enterprise.pwc.datalabs.security.utils.PwcSecurityUtils;
+import com.alpha.omega.cache.CacheDao;
+import com.alpha.omega.cache.expiration.Expiration;
+import com.alpha.omega.security.authentication.UserProfileAuthentication;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.pwc.base.utils.BaseUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.security.core.context.SecurityContext;
@@ -17,9 +15,11 @@ import reactor.core.publisher.Mono;
 
 import java.util.Optional;
 
+import static com.alpha.omega.security.utils.AOSecurityUtils.convertStringToObjectNoException;
+
 public class AOServerSecurityContextService implements ServerSecurityContextRepository {
 
-	private static Logger logger = LogManager.getLogger(PwcSecurityUtils.class);
+	private static Logger logger = LogManager.getLogger(AOServerSecurityContextService.class);
 	final static String CONTEXT_NAMESPACE = "security.context.namespace";
 
 	CacheDao cacheDao;
@@ -58,7 +58,7 @@ public class AOServerSecurityContextService implements ServerSecurityContextRepo
 				.map(cKey -> cacheDao.getObjectFromCacheOptional(CONTEXT_NAMESPACE, cKey, String.class))
 				.filter(Optional::isPresent)
 				.doOnNext((val) -> logger.info("Got value from cache {}",val))
-				.map(cacheVal ->  BaseUtil.convertStringToObjectNoException(cacheVal.get(), UserProfileAuthentication.class))
+				.map(cacheVal ->  convertStringToObjectNoException(cacheVal.get(), UserProfileAuthentication.class))
 				.map(auth -> new SecurityContextImpl(auth));
 	}
 

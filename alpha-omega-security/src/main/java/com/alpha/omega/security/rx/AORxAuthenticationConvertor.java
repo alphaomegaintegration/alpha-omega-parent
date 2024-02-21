@@ -1,10 +1,14 @@
 package com.alpha.omega.security.rx;
 
-import com.enterprise.pwc.datalabs.security.PwcSecurityProperties;
-import com.enterprise.pwc.datalabs.security.authentication.PwcAuthenticationConvertor;
-import com.enterprise.pwc.datalabs.security.token.issuer.TokenIssuerClaimsMapperService;
+import com.alpha.omega.security.authentication.AOAuthenticationConvertor;
+import com.alpha.omega.security.model.UserProfile;
+import com.alpha.omega.security.token.TokenIssuerClaimsMapperService;
+import com.alpha.omega.security.utils.AOSecurityProperties;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.pwc.base.model.UserProfile;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 import org.apache.commons.lang3.tuple.Pair;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -19,34 +23,30 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 
-public class AORxAuthenticationConvertor extends PwcAuthenticationConvertor implements ServerAuthenticationConverter {
+@SuperBuilder
+@NoArgsConstructor
+@AllArgsConstructor
+public class AORxAuthenticationConvertor extends AOAuthenticationConvertor implements ServerAuthenticationConverter {
 
 	private static Logger logger = LogManager.getLogger(AORxAuthenticationConvertor.class);
 
-	private PwcRxServerWebExchangeToRequestMap toRequestMap = new PwcRxServerWebExchangeToRequestMap();
-	private PwcSecurityProperties pwcSecurityProperties;
+	private AORxServerWebExchangeToRequestMap toRequestMap = new AORxServerWebExchangeToRequestMap();
+	private AOSecurityProperties aoSecurityProperties;
 	private ObjectMapper objectMapper;
 	private TokenIssuerClaimsMapperService claimsMapperService;
-
-	public AORxAuthenticationConvertor(PwcSecurityProperties pwcSecurityProperties,
-									   TokenIssuerClaimsMapperService claimsMapperService) {
-		super(pwcSecurityProperties,claimsMapperService);
-		this.pwcSecurityProperties = pwcSecurityProperties;
-		this.claimsMapperService = claimsMapperService;
-	}
 
 	@Override
 	public Mono<Authentication> convert(ServerWebExchange exchange) {
 
 		final Map<String, Object> requestMap = Collections.unmodifiableMap(convertRequestHeadersToMap(exchange));
 
-		if (!pwcSecurityProperties.isMaskSensitive()){
+		if (!aoSecurityProperties.isMaskSensitive()){
 			logger.debug("Got requestMap => {}",requestMap);
 		}
 
 
 		return Mono.just(requestMap)
-				.map(requestMapToPreAuthenticationPrincipal(pwcSecurityProperties, objectMapper, claimsMapperService))
+				.map(requestMapToPreAuthenticationPrincipal(aoSecurityProperties, objectMapper, claimsMapperService))
 				.map(preAuth -> {
 					((UserProfile)preAuth.getPrincipal()).setAdditionalMetaData(requestMap);
 					return preAuth;
@@ -72,48 +72,4 @@ public class AORxAuthenticationConvertor extends PwcAuthenticationConvertor impl
 		return attributes;
 	}
 
-	public static Builder newBuilder() {
-		return new Builder();
-	}
-
-	public static final class Builder {
-		private PwcRxServerWebExchangeToRequestMap toRequestMap = new PwcRxServerWebExchangeToRequestMap();
-		private PwcSecurityProperties pwcSecurityProperties;
-		private ObjectMapper objectMapper;
-		private TokenIssuerClaimsMapperService claimsMapperService;
-
-		private Builder() {
-		}
-
-		public static Builder aPwcRxAuthenticationConvertor() {
-			return new Builder();
-		}
-
-		public Builder setToRequestMap(PwcRxServerWebExchangeToRequestMap toRequestMap) {
-			this.toRequestMap = toRequestMap;
-			return this;
-		}
-
-		public Builder setPwcSecurityProperties(PwcSecurityProperties pwcSecurityProperties) {
-			this.pwcSecurityProperties = pwcSecurityProperties;
-			return this;
-		}
-
-		public Builder setObjectMapper(ObjectMapper objectMapper) {
-			this.objectMapper = objectMapper;
-			return this;
-		}
-
-		public Builder setClaimsMapperService(TokenIssuerClaimsMapperService claimsMapperService) {
-			this.claimsMapperService = claimsMapperService;
-			return this;
-		}
-
-		public AORxAuthenticationConvertor build() {
-			AORxAuthenticationConvertor pwcRxAuthenticationConvertor = new AORxAuthenticationConvertor(pwcSecurityProperties,claimsMapperService);
-			pwcRxAuthenticationConvertor.setObjectMapper(objectMapper);
-			pwcRxAuthenticationConvertor.toRequestMap = this.toRequestMap;
-			return pwcRxAuthenticationConvertor;
-		}
-	}
 }

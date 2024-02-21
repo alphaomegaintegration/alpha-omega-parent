@@ -20,8 +20,8 @@ public interface AOSecurityWebFilterChainFactory {
 
 	public SecurityWebFilterChain createSecurityWebFilterChain(AORxSecurityWebFilterChainRequest filterChainRequest);
 
-	default ServerWebExchangeMatcher pwcServerWebExchangeMatcher(Collection<String> includeUrls, Map<String, HttpMethod> protectedUrlsMethod){
-		logger.debug("pwcServerWebExchangeMatcher includeUrls => {}",includeUrls);
+	default ServerWebExchangeMatcher aoServerWebExchangeMatcher(Collection<String> includeUrls, Map<String, HttpMethod> protectedUrlsMethod){
+		logger.debug("aoServerWebExchangeMatcher includeUrls => {}",includeUrls);
 		List<ServerWebExchangeMatcher> matchersList =  includeUrls.stream()
 				.map(url -> new PathPatternParserServerWebExchangeMatcher(url))
 				.collect(Collectors.toList());
@@ -32,13 +32,13 @@ public interface AOSecurityWebFilterChainFactory {
 
 		matchersListMethods.addAll(matchersList);
 
-		logger.debug("pwcServerWebExchangeMatcher matchersListMethods => {}",matchersListMethods);
+		logger.debug("aoServerWebExchangeMatcher matchersListMethods => {}",matchersListMethods);
 		OrServerWebExchangeMatcher serverWebExchangeMatcher = new OrServerWebExchangeMatcher(matchersListMethods);
 		return serverWebExchangeMatcher;
 	}
 
 	default void validate(AORxSecurityWebFilterChainRequest filterChainRequest){
-		Objects.requireNonNull(filterChainRequest,"PwcRxSecurityWebFilterChainRequest cannot be null");
+		Objects.requireNonNull(filterChainRequest,"aoRxSecurityWebFilterChainRequest cannot be null");
 		Objects.requireNonNull(filterChainRequest.getResolver(),"resolver cannot be null");
 		Objects.requireNonNull(filterChainRequest.getConverter(),"converter cannot be null");
 	}

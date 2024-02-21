@@ -1,4 +1,4 @@
-package com.enterprise.pwc.datalabs.security.token.issuer;
+package com.alpha.omega.security.token;
 
 public class StandardTokenIssuerClaimsMappingService implements TokenIssuerClaimsMapperService{
 }

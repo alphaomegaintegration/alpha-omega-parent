@@ -11,7 +11,7 @@ import java.util.Set;
 
 public interface AOSecurityFilterChainFactory {
 
-	public SecurityFilterChain createSecurityFilterChain(PwcSecurityFilterChainRequest filterChainRequest);
+	public SecurityFilterChain createSecurityFilterChain(AOSecurityFilterChainRequest filterChainRequest);
 	public SecurityFilterChain createSecurityFilterChain(List<Filter> filters, Set<String> protectedUrls,
 														 Map<String, HttpMethod> protectedUrlsMethod,
 														 List<String> excludeUrls, HttpSecurity httpSecurity,

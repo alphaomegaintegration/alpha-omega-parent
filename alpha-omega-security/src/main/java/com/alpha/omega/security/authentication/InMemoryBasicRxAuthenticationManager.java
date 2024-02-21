@@ -1,9 +1,7 @@
 package com.alpha.omega.security.authentication;
 
-import com.enterprise.pwc.datalabs.security.authorization.AuthorizationService;
-import com.enterprise.pwc.datalabs.security.exception.PwcGlobalExceptionHandler;
-import com.pwc.base.model.UserProfile;
-import com.pwc.base.utils.BaseUtil;
+import com.alpha.omega.security.authorization.AuthorizationService;
+import com.alpha.omega.security.model.UserProfile;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.security.authentication.ReactiveAuthenticationManager;
@@ -18,11 +16,12 @@ import reactor.core.publisher.Mono;
 
 import javax.annotation.PostConstruct;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-public class InMemoryBasicRxAuthenticationManager extends BaseAuthenticationManager implements ReactiveAuthenticationManager {
+import static com.alpha.omega.security.utils.AOSecurityUtils.parseBasicAuthString;
+
+public class InMemoryBasicRxAuthenticationManager  implements ReactiveAuthenticationManager {
 
 	private static Logger logger = LogManager.getLogger(InMemoryBasicRxAuthenticationManager.class);
 
@@ -62,19 +61,20 @@ public class InMemoryBasicRxAuthenticationManager extends BaseAuthenticationMana
 	@Override
 	public Mono<Authentication> authenticate(Authentication authentication) {
 		logger.debug("Got authentication name  => {}",authentication.getName());
-		return Mono.just(authentication)
+		return Mono.just(authentication);
+/*		return Mono.just(authentication)
 				.map(getAuthenticationUsernamePasswordAuthenticationTokenFunction())
 				//.doOnNext(token -> logger.info("What are the creds here? => {} name here {}",token.getCredentials().toString(),token.getName()))
 				.map(auth -> daoAuthenticationProvider.authenticate(auth))
 				.map(auth -> extractUserProfile(authentication))
 				.flatMap(userProfile -> Mono.zip(Mono.just(userProfile),
 						Mono.just(authorizationResponseFromUserProfile(authorizationService).apply(userProfile)),
-						userProfileAuthenticationFromAuthResponse()));
+						userProfileAuthenticationFromAuthResponse()));*/
 	}
 
 	private Function<Authentication, UsernamePasswordAuthenticationToken> getAuthenticationUsernamePasswordAuthenticationTokenFunction() {
 		return auth -> new UsernamePasswordAuthenticationToken(((UserProfile) auth.getPrincipal()).getName(),
-				BaseUtil.parseBasicAuthString((String) auth.getCredentials())._2());
+				parseBasicAuthString((String) auth.getCredentials()).getT2());
 	}
 
 	private UserProfile extractUserProfile(Authentication authentication) {
@@ -87,64 +87,4 @@ public class InMemoryBasicRxAuthenticationManager extends BaseAuthenticationMana
 		return (String) ((PreAuthenticationPrincipal) auth).getCredentials();
 	}
 
-	public static Builder newBuilder() {
-		return new Builder();
-	}
-
-
-	public static final class Builder {
-		protected PwcGlobalExceptionHandler globalExceptionHandler = new PwcGlobalExceptionHandler();
-		private Collection<? extends UserDetails> userDetailsCollection = new HashSet<>();
-		private InMemoryUserDetailsManager inMemoryUserDetailsManager;
-		private DaoAuthenticationProvider daoAuthenticationProvider;
-		private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-		private AuthorizationService authorizationService;
-
-		private Builder() {
-		}
-
-		public static Builder anInMemoryBasicRxAuthenticationManager() {
-			return new Builder();
-		}
-
-		public Builder setGlobalExceptionHandler(PwcGlobalExceptionHandler globalExceptionHandler) {
-			this.globalExceptionHandler = globalExceptionHandler;
-			return this;
-		}
-
-		public Builder setUserDetailsCollection(Collection<? extends UserDetails> userDetailsCollection) {
-			this.userDetailsCollection = userDetailsCollection;
-			return this;
-		}
-
-		public Builder setInMemoryUserDetailsManager(InMemoryUserDetailsManager inMemoryUserDetailsManager) {
-			this.inMemoryUserDetailsManager = inMemoryUserDetailsManager;
-			return this;
-		}
-
-		public Builder setDaoAuthenticationProvider(DaoAuthenticationProvider daoAuthenticationProvider) {
-			this.daoAuthenticationProvider = daoAuthenticationProvider;
-			return this;
-		}
-
-		public Builder setPasswordEncoder(PasswordEncoder passwordEncoder) {
-			this.passwordEncoder = passwordEncoder;
-			return this;
-		}
-
-		public Builder setAuthorizationService(AuthorizationService authorizationService) {
-			this.authorizationService = authorizationService;
-			return this;
-		}
-
-		public InMemoryBasicRxAuthenticationManager build() {
-			InMemoryBasicRxAuthenticationManager inMemoryBasicRxAuthenticationManager = new InMemoryBasicRxAuthenticationManager(userDetailsCollection);
-			inMemoryBasicRxAuthenticationManager.daoAuthenticationProvider = this.daoAuthenticationProvider;
-			inMemoryBasicRxAuthenticationManager.globalExceptionHandler = this.globalExceptionHandler;
-			inMemoryBasicRxAuthenticationManager.inMemoryUserDetailsManager = this.inMemoryUserDetailsManager;
-			inMemoryBasicRxAuthenticationManager.passwordEncoder = this.passwordEncoder;
-			inMemoryBasicRxAuthenticationManager.authorizationService = this.authorizationService;
-			return inMemoryBasicRxAuthenticationManager;
-		}
-	}
 }

@@ -1,4 +1,4 @@
-package com.pwc.base.model;
+package com.alpha.omega.security.model;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -23,12 +23,9 @@ public class UserProfile {
     private String accessToken;
 	private String refreshToken;
     private String countryCode;
-	private AccountType accountType;
 	private String serviceName;
 	private String identityProvider;
 	private String contextId;
-	private String engagementId;
-	private String workspaceId;
 	private String correlationId;
 	private String email;
 	@Builder.Default

@@ -1,6 +1,5 @@
 package com.alpha.omega.security.authorization;
 
-import com.pwc.base.log.PWCLogUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
@@ -73,8 +72,7 @@ public class ZippedAuthorizationService implements AuthorizationService {
 				return authorizationService.getAuthorizations(authorizationRequest);
 			} catch (Exception exception){
 				logger.error("{} authorizationService could not getAuthorizations ",authorizationService.getName(),exception);
-				final List<String> content = logger.isDebugEnabled() ? PWCLogUtils.getStackTraceAsList(exception) :
-						Collections.singletonList(exception.getMessage());
+				final List<String> content = Collections.singletonList(exception.getMessage());
 				return Optional.of(AuthorizationResponse.newBuilder()
 						.setCorrelationId(authorizationRequest.getCorrelationId())
 						.setErrorMessages(content)

@@ -1,6 +1,6 @@
 package com.alpha.omega.security.spel;
 
-import com.enterprise.pwc.datalabs.security.permission.PwcSimpleAuthority;
+import com.alpha.omega.security.permission.AOSimpleAuthority;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,7 @@ public class Helper {
 
 	public static boolean hasPermission(Authentication authentication, Object permission) {
 		logger.debug("hasPermission authentication => {}, permission => {}", new Object[]{authentication, permission});
-		return authentication.getAuthorities().contains(new PwcSimpleAuthority(permission.toString()));
+		return authentication.getAuthorities().contains(new AOSimpleAuthority(permission.toString()));
 	}
 
 	public static boolean hasPermissions(Authentication authentication, Object... permissions) {

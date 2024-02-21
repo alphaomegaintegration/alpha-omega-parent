@@ -1,4 +1,4 @@
-package com.alpha.omega.security.security;
+package com.alpha.omega.security.utils;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;

@@ -1,7 +1,7 @@
 package com.alpha.omega.security.authorization;
 
-import com.enterprise.pwc.datalabs.security.permission.PwcSimpleAuthority;
-import com.enterprise.pwc.datalabs.security.userdetails.UCPUserDetails;
+import com.alpha.omega.security.permission.AOSimpleAuthority;
+import com.alpha.omega.security.userdetails.UCPUserDetails;
 import org.apache.commons.lang3.tuple.Pair;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,10 +12,10 @@ import java.util.stream.Collectors;
 
 public class InMemoryAuthorizationService implements AuthorizationService {
 
-	private static final Logger logger = LoggerFactory.getLogger(LegacyEngagementAuthorizationService.class);
+	private static final Logger logger = LoggerFactory.getLogger(InMemoryAuthorizationService.class);
 
 	private static final String NO_LOCATIONS_MESSAGE =
-			"No locations configured for property pwc.authorization-service.context-authorizations-locations. " +
+			"No locations configured for property ao.authorization-service.context-authorizations-locations. " +
 					"Please provide a comma separated list of locations EG classpath:auth.json";
 
 	AuthorizationServiceProperties properties;
@@ -51,8 +51,8 @@ public class InMemoryAuthorizationService implements AuthorizationService {
 		Pair<String, String> key = Pair.of(authorizationRequest.getUserName(), authorizationRequest.getContextId());
 		UCPUserDetails userDetails = contexts.get(key);
 		if (userDetails != null){
-			Set<PwcSimpleAuthority> perms = userDetails.getPermissions().stream()
-					.map(perm -> new PwcSimpleAuthority(perm))
+			Set<AOSimpleAuthority> perms = userDetails.getPermissions().stream()
+					.map(perm -> new AOSimpleAuthority(perm))
 					.collect(Collectors.toSet());
 
 			authorizationResponse = AuthorizationResponse.newBuilder()

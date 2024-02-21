@@ -18,7 +18,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class DefaultAOSecurityFilterChainFactory implements PwcSecurityFilterChainFactory {
+public class DefaultAOSecurityFilterChainFactory implements AOSecurityFilterChainFactory {
 
 	private static final Logger logger = LoggerFactory.getLogger(DefaultAOSecurityFilterChainFactory.class);
 
@@ -30,7 +30,7 @@ public class DefaultAOSecurityFilterChainFactory implements PwcSecurityFilterCha
 	https://www.baeldung.com/spring-security-csrf#example
 	 */
 
-	public SecurityFilterChain createSecurityFilterChain(PwcSecurityFilterChainRequest filterChainRequest) {
+	public SecurityFilterChain createSecurityFilterChain(AOSecurityFilterChainRequest filterChainRequest) {
 
 		try {
 			HttpSecurity http = filterChainRequest.getHttpSecurity();
@@ -57,7 +57,7 @@ public class DefaultAOSecurityFilterChainFactory implements PwcSecurityFilterCha
 			http.authorizeHttpRequests((authorize) -> authorize
 					.requestMatchers(unauthRoutes).permitAll()
 					.requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-			).anonymous().and().cors();
+			);
 
 			http.securityMatcher(orRequestMatcher)
 					.authorizeHttpRequests((authz) -> authz.anyRequest().authenticated());
@@ -72,11 +72,6 @@ public class DefaultAOSecurityFilterChainFactory implements PwcSecurityFilterCha
 			filters.stream().forEach(filter -> http.securityMatcher(orRequestMatcher)
 					.addFilterAfter(filter, SecurityContextHolderFilter.class));
 
-			if (filterChainRequest.isDisableCSRF()) {
-				http.csrf().disable();
-			}
-
-			http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 			return http.build();
 		} catch (Exception e) {
 			throw new BeanCreationException("Could not create security filter chain", e);
@@ -113,7 +108,7 @@ public class DefaultAOSecurityFilterChainFactory implements PwcSecurityFilterCha
 					.requestMatchers(unauthRoutes).permitAll()
 					.requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 					.requestMatchers(orRequestMatcher).authenticated()
-			).cors();
+			);
 
 			filters.stream().forEach(filter -> http.securityMatcher(orRequestMatcher)
 					.addFilterAfter(filter, SecurityContextHolderFilter.class));
@@ -122,7 +117,7 @@ public class DefaultAOSecurityFilterChainFactory implements PwcSecurityFilterCha
 				http.csrf().disable();
 			}
 
-			http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
 			return http.build();
 		} catch (Exception e) {
 			throw new BeanCreationException("Could not create security filter chain", e);
@@ -130,7 +125,7 @@ public class DefaultAOSecurityFilterChainFactory implements PwcSecurityFilterCha
 
 
 		/*
-		return this.createSecurityFilterChain(PwcSecurityFilterChainRequest.newBuilder()
+		return this.createSecurityFilterChain(aoSecurityFilterChainRequest.newBuilder()
 				.setProtectedUrls(new HashSet<>(protectedUrls))
 				.setHttpSecurity(http)
 				.setFilters(new ArrayList<>(filters))

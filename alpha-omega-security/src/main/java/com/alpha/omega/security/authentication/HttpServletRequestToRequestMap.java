@@ -6,7 +6,7 @@ import org.springframework.http.HttpHeaders;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import static com.pwc.base.utils.BaseConstants.*;
+import static com.alpha.omega.core.Constants.*;
 
 public class HttpServletRequestToRequestMap implements RequestToRequestMap<HttpServletRequest>{
 	@Override
@@ -15,7 +15,6 @@ public class HttpServletRequestToRequestMap implements RequestToRequestMap<HttpS
 		putIfNotNull(requestMap, PRINCIPAL, request.getHeader(PRINCIPAL));
 		putIfNotNull(requestMap, IDENTITY_PROVIDER, request.getHeader(IDENTITY_PROVIDER));
 		putIfNotNull(requestMap, REFRESH_TOKEN_HEADER, request.getHeader(REFRESH_TOKEN_HEADER));
-		putIfNotNull(requestMap, ENGAGEMENT_ID, request.getHeader(ENGAGEMENT_ID));
 		putIfNotNull(requestMap, CORRELATION_ID, request.getHeader(CORRELATION_ID));
 		putIfNotNull(requestMap, CONTEXT_ID, request.getHeader(CONTEXT_ID));
 		putIfNotNull(requestMap, HttpHeaders.AUTHORIZATION, request.getHeader(HttpHeaders.AUTHORIZATION));

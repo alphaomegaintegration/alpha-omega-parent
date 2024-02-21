@@ -23,6 +23,18 @@
 
     <dependencies>
         <dependency>
+            <groupId>com.alpha.omega</groupId>
+            <artifactId>alpha-omega-core</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.alpha.omega</groupId>
+            <artifactId>alpha-omega-cache</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
@@ -104,6 +116,7 @@
             <artifactId>javax.annotation-api</artifactId>
             <version>1.3.2</version>
         </dependency>
+
 
     </dependencies>
 

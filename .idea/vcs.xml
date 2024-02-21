@@ -2,6 +2,7 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/alpha-omega-cdk" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/alpha-omega-batch" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/alpha-omega-cache" vcs="Git" />
   </component>
 </project>

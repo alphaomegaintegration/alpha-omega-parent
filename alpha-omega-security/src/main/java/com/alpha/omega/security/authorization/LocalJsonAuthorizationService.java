@@ -1,9 +1,9 @@
 package com.alpha.omega.security.authorization;
 
-import com.enterprise.pwc.datalabs.caching.DefaultObjectMapperFactory;
-import com.enterprise.pwc.datalabs.caching.ObjectMapperFactory;
-import com.enterprise.pwc.datalabs.security.context.UserContextPermissions;
-import com.enterprise.pwc.datalabs.security.permission.PwcSimpleAuthority;
+import com.alpha.omega.cache.DefaultObjectMapperFactory;
+import com.alpha.omega.cache.ObjectMapperFactory;
+import com.alpha.omega.security.context.UserContextPermissions;
+import com.alpha.omega.security.permission.AOSimpleAuthority;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -24,10 +24,10 @@ import java.util.stream.Collectors;
 
 public class LocalJsonAuthorizationService implements AuthorizationService {
 
-	private static final Logger logger = LoggerFactory.getLogger(LegacyEngagementAuthorizationService.class);
+	private static final Logger logger = LoggerFactory.getLogger(LocalJsonAuthorizationService.class);
 
 	private static final String NO_LOCATIONS_MESSAGE =
-			"No locations configured for property pwc.authorization-service.context-authorizations-locations. " +
+			"No locations configured for property ao.authorization-service.context-authorizations-locations. " +
 					"Please provide a comma separated list of locations EG classpath:auth.json";
 
 	AuthorizationServiceProperties properties;
@@ -61,15 +61,15 @@ public class LocalJsonAuthorizationService implements AuthorizationService {
 	public Optional<AuthorizationResponse> getAuthorizations(AuthorizationRequest authorizationRequest) {
 		AuthorizationResponse authorizationResponse = null;
 
-		Set<PwcSimpleAuthority> perms = new HashSet<>();
+		Set<AOSimpleAuthority> perms = new HashSet<>();
 		if (properties.isAddUserNameToAuthorizations()){
-			perms.add(new PwcSimpleAuthority(authorizationRequest.getUserName()));
+			perms.add(new AOSimpleAuthority(authorizationRequest.getUserName()));
 		}
 		Pair<String, String> key = Pair.of(authorizationRequest.getUserName(), authorizationRequest.getContextId());
 		UserContextPermissions userContextPermissions = contexts.get(key);
 		if (userContextPermissions != null){
-			Set<PwcSimpleAuthority> foundPerms = userContextPermissions.getPermissions().stream()
-					.map(perm -> new PwcSimpleAuthority(perm))
+			Set<AOSimpleAuthority> foundPerms = userContextPermissions.getPermissions().stream()
+					.map(perm -> new AOSimpleAuthority(perm))
 					.collect(Collectors.toSet());
 			perms.addAll(foundPerms);
 		}

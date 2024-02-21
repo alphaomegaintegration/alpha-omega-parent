@@ -2,7 +2,7 @@ package com.alpha.omega.security.key;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-@ConfigurationProperties(prefix = "pwc.public-key-resolver")
+@ConfigurationProperties(prefix = "ao.public-key-resolver")
 public class PublicKeyResolverProperties {
 
 	private String idpMappingPath;

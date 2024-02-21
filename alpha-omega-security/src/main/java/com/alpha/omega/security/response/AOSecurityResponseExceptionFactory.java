@@ -4,5 +4,5 @@ import org.springframework.http.HttpHeaders;
 
 public interface AOSecurityResponseExceptionFactory {
 
-	AOSecurityResponse createPwcSecurityResponse(Exception exception, HttpHeaders httpHeaders);
+	AOSecurityResponse createAOSecurityResponse(Exception exception, HttpHeaders httpHeaders);
 }

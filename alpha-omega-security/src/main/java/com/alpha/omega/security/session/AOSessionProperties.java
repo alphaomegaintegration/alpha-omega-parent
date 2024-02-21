@@ -13,7 +13,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ToString
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@ConfigurationProperties(prefix = "pwc.session")
+@ConfigurationProperties(prefix = "ao.session")
 public class AOSessionProperties {
 	String provider;
 	String sessionIdKey = "SESSION";

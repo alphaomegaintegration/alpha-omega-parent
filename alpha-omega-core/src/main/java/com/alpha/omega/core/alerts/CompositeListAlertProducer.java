@@ -1,4 +1,4 @@
-package com.pwc.base.alerts;
+package com.alpha.omega.core.alerts;
 
 import org.springframework.util.Assert;
 
@@ -38,11 +38,11 @@ public class CompositeListAlertProducer implements AlertProducer{
 		try{
 			alertProducer.sendAlert(alertSupplier);
 		} catch (Exception e){
-			final Alert alert = Alert.newBuilder()
-					.setAlertName(alertProducer.getClass().getName())
-					.setAlertLevel(AlertPriority.HIGH.getPriority())
-					.setAlertPriority(AlertPriority.HIGH)
-					.setMessage(String.format("Alert producer %s failed with message %s", alertProducer.getClass().getName(),
+			final Alert alert = Alert.builder()
+					.alertName(alertProducer.getClass().getName())
+					.alertLevel(AlertPriority.HIGH.getPriority())
+					.alertPriority(AlertPriority.HIGH)
+					.message(String.format("Alert producer %s failed with message %s", alertProducer.getClass().getName(),
 							e.getMessage()))
 					.build();
 			defaultLoggingAlertProducer.sendAlert(() -> Optional.of(alert));

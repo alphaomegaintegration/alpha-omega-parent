@@ -1,6 +1,6 @@
 package com.alpha.omega.security.authorization;
 
-import com.enterprise.pwc.datalabs.security.permission.PwcSimpleAuthority;
+import com.alpha.omega.security.permission.AOSimpleAuthority;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -10,7 +10,7 @@ public class AuthorizationResponse {
 	private String contextId;
 	private String correlationId;
 	private Collection<String> errorMessages = Collections.EMPTY_SET;
-	private Collection<PwcSimpleAuthority> authorities = Collections.EMPTY_SET;
+	private Collection<AOSimpleAuthority> authorities = Collections.EMPTY_SET;
 	private Long elapsedProcessing;
 	private String elapsedProcessingStr;
 
@@ -26,7 +26,7 @@ public class AuthorizationResponse {
 		return new Builder();
 	}
 
-	public Collection<PwcSimpleAuthority> getAuthorities() {
+	public Collection<AOSimpleAuthority> getAuthorities() {
 		return authorities;
 	}
 
@@ -81,7 +81,7 @@ public class AuthorizationResponse {
 		private String contextId;
 		private String correlationId;
 		private Collection<String> errorMessages = Collections.EMPTY_SET;
-		private Collection<PwcSimpleAuthority> authorities = Collections.EMPTY_SET;
+		private Collection<AOSimpleAuthority> authorities = Collections.EMPTY_SET;
 		private Long elapsedProcessing;
 		private String elapsedProcessingStr;
 
@@ -107,7 +107,7 @@ public class AuthorizationResponse {
 			return this;
 		}
 
-		public Builder setAuthorities(Collection<PwcSimpleAuthority> authorities) {
+		public Builder setAuthorities(Collection<AOSimpleAuthority> authorities) {
 			this.authorities = authorities;
 			return this;
 		}

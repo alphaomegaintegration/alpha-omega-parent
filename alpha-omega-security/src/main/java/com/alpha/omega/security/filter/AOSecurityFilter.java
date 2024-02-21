@@ -1,10 +1,13 @@
 package com.alpha.omega.security.filter;
 
-import com.enterprise.pwc.datalabs.security.authentication.PwcSecurityEntryPoint;
+import com.alpha.omega.security.authentication.AOSecurityEntryPoint;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpStatus;
@@ -22,7 +25,9 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.annotation.PostConstruct;
 import java.io.IOException;
-
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public final class AOSecurityFilter extends OncePerRequestFilter {
 
 	private static Logger logger = LogManager.getLogger(AOSecurityFilter.class);
@@ -33,80 +38,10 @@ public final class AOSecurityFilter extends OncePerRequestFilter {
 
 	private AuthenticationSuccessHandler successHandler;
 
-	private PwcSecurityEntryPoint entryPoint;
+	private AOSecurityEntryPoint entryPoint;
 	private AuthenticationFailureHandler failureHandler;
 
 	private AuthenticationManagerResolver<HttpServletRequest> authenticationManagerResolver;
-
-	public AOSecurityFilter(AuthenticationManager authenticationManager,
-							AuthenticationConverter authenticationConverter) {
-		this((AuthenticationManagerResolver<HttpServletRequest>) (r) -> authenticationManager, authenticationConverter);
-
-		logger.info("=============== Creating PwcSecurityFilter ..........");
-	}
-
-	public AOSecurityFilter(AuthenticationManagerResolver<HttpServletRequest> authenticationManagerResolver,
-							AuthenticationConverter authenticationConverter) {
-		Assert.notNull(authenticationManagerResolver, "authenticationManagerResolver cannot be null");
-		Assert.notNull(authenticationConverter, "authenticationConverter cannot be null");
-		this.authenticationManagerResolver = authenticationManagerResolver;
-		this.authenticationConverter = authenticationConverter;
-		logger.info("=============== Creating PwcSecurityFilter ..........");
-	}
-
-	public RequestMatcher getExcludeRequestMatcher() {
-		return this.excludeRequestMatcher;
-	}
-
-	public void setExcludeRequestMatcher(RequestMatcher excludeRequestMatcher) {
-		Assert.notNull(excludeRequestMatcher, "requestMatcher cannot be null");
-		this.excludeRequestMatcher = excludeRequestMatcher;
-	}
-
-	public AuthenticationConverter getAuthenticationConverter() {
-		return this.authenticationConverter;
-	}
-
-	public void setAuthenticationConverter(AuthenticationConverter authenticationConverter) {
-		Assert.notNull(authenticationConverter, "authenticationConverter cannot be null");
-		this.authenticationConverter = authenticationConverter;
-	}
-
-	public AuthenticationSuccessHandler getSuccessHandler() {
-		return this.successHandler;
-	}
-
-	public void setSuccessHandler(AuthenticationSuccessHandler successHandler) {
-		Assert.notNull(successHandler, "successHandler cannot be null");
-		this.successHandler = successHandler;
-	}
-
-	public AuthenticationFailureHandler getFailureHandler() {
-		return this.failureHandler;
-	}
-
-	public void setFailureHandler(AuthenticationFailureHandler failureHandler) {
-		Assert.notNull(failureHandler, "failureHandler cannot be null");
-		this.failureHandler = failureHandler;
-	}
-
-	public AuthenticationManagerResolver<HttpServletRequest> getAuthenticationManagerResolver() {
-		return this.authenticationManagerResolver;
-	}
-
-	public void setAuthenticationManagerResolver(
-			AuthenticationManagerResolver<HttpServletRequest> authenticationManagerResolver) {
-		Assert.notNull(authenticationManagerResolver, "authenticationManagerResolver cannot be null");
-		this.authenticationManagerResolver = authenticationManagerResolver;
-	}
-
-	public PwcSecurityEntryPoint getEntryPoint() {
-		return entryPoint;
-	}
-
-	public void setEntryPoint(PwcSecurityEntryPoint entryPoint) {
-		this.entryPoint = entryPoint;
-	}
 
 	@PostConstruct
 	public void init(){
@@ -116,7 +51,7 @@ public final class AOSecurityFilter extends OncePerRequestFilter {
 		Assert.notNull(successHandler, "successHandler cannot be null");
 		Assert.notNull(authenticationManagerResolver, "authenticationManagerResolver cannot be null");
 		Assert.notNull(failureHandler, "failureHandler cannot be null");
-		logger.info("=============== Configured PwcSecurityFilter ..........");
+		logger.info("=============== Configured aoSecurityFilter ..........");
 	}
 
 	@Override
@@ -181,68 +116,6 @@ public final class AOSecurityFilter extends OncePerRequestFilter {
 		return authenticationResult;
 	}
 
-	public static Builder newBuilder() {
-		return new Builder();
-	}
-
-
-
-
-	public static final class Builder {
-		private RequestMatcher requestMatcher = AnyRequestMatcher.INSTANCE;
-		private AuthenticationConverter authenticationConverter;
-		private AuthenticationSuccessHandler successHandler = new SavedRequestAwareAuthenticationSuccessHandler();
-		private AuthenticationFailureHandler failureHandler = new AuthenticationEntryPointFailureHandler(
-				new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED));
-		private AuthenticationManagerResolver<HttpServletRequest> authenticationManagerResolver;
-		private PwcSecurityEntryPoint entryPoint;
-
-		private Builder() {
-		}
-
-		public static Builder aPwcSecurityFilter() {
-			return new Builder();
-		}
-
-		public Builder setRequestMatcher(RequestMatcher requestMatcher) {
-			this.requestMatcher = requestMatcher;
-			return this;
-		}
-
-		public Builder setAuthenticationConverter(AuthenticationConverter authenticationConverter) {
-			this.authenticationConverter = authenticationConverter;
-			return this;
-		}
-
-		public Builder setSuccessHandler(AuthenticationSuccessHandler successHandler) {
-			this.successHandler = successHandler;
-			return this;
-		}
-
-		public Builder setFailureHandler(AuthenticationFailureHandler failureHandler) {
-			this.failureHandler = failureHandler;
-			return this;
-		}
-
-		public Builder setAuthenticationManagerResolver(AuthenticationManagerResolver<HttpServletRequest> authenticationManagerResolver) {
-			this.authenticationManagerResolver = authenticationManagerResolver;
-			return this;
-		}
-
-		public Builder setEntryPoint(PwcSecurityEntryPoint entryPoint) {
-			this.entryPoint = entryPoint;
-			return this;
-		}
-
-		public AOSecurityFilter build() {
-			AOSecurityFilter AOSecurityFilter = new AOSecurityFilter(authenticationManagerResolver, authenticationConverter);
-			AOSecurityFilter.setExcludeRequestMatcher(requestMatcher);
-			AOSecurityFilter.setSuccessHandler(successHandler);
-			AOSecurityFilter.setFailureHandler(failureHandler);
-			AOSecurityFilter.setEntryPoint(entryPoint);
-			return AOSecurityFilter;
-		}
-	}
 }
 
 

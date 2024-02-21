@@ -1,6 +1,6 @@
 package com.alpha.omega.security.authorization;
 
-import com.enterprise.pwc.datalabs.security.permission.PwcSimpleAuthority;
+import com.alpha.omega.security.permission.AOSimpleAuthority;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
@@ -12,12 +12,12 @@ public class AuthorizationRequestAttributesAuthorizationService implements Autho
 	@Override
 	public Optional<AuthorizationResponse> getAuthorizations(AuthorizationRequest authorizationRequest) {
 		Objects.requireNonNull(authorizationRequest.getUserName(), "Username not set. Maybe basic not valid");
-		List<PwcSimpleAuthority> authorities = new ArrayList<>();
+		List<AOSimpleAuthority> authorities = new ArrayList<>();
 		if (StringUtils.isNotBlank(authorizationRequest.getUserName())){
-			authorities.add(new PwcSimpleAuthority(authorizationRequest.getUserName()));
+			authorities.add(new AOSimpleAuthority(authorizationRequest.getUserName()));
 		}
 		if (StringUtils.isNotBlank(authorizationRequest.getServiceName())){
-			authorities.add(new PwcSimpleAuthority(authorizationRequest.getServiceName()));
+			authorities.add(new AOSimpleAuthority(authorizationRequest.getServiceName()));
 		}
 		return Optional.of(AuthorizationResponse
 				.newBuilder()

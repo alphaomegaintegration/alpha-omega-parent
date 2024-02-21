@@ -1,4 +1,4 @@
-package com.pwc.base.alerts;
+package com.alpha.omega.core.alerts;
 
 public enum AlertPriority {
 	CRITICAL(1), HIGH(2), MEDIUM(3), LOW(4), UNKNOWN(5);

@@ -1,4 +1,4 @@
-package com.pwc.base.model;
+package com.alpha.omega.security.model;
 
 public class UserProfileContext {
 	private static ThreadLocal<UserProfile> threadLocal = new ThreadLocal<>();

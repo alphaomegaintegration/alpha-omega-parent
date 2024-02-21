@@ -1,6 +1,7 @@
 package com.alpha.omega.security.key;
 
-import com.enterprise.pwc.datalabs.security.PwcSecurityConstants;
+
+import com.alpha.omega.security.utils.AOSecurityConstants;
 
 import java.math.BigInteger;
 import java.security.*;
@@ -46,12 +47,12 @@ public class KeyUtils {
 
 		String encoodedModulus =  Base64.getUrlEncoder().encodeToString(pub.getModulus().toByteArray());
 		String encodedExponent =  Base64.getUrlEncoder().encodeToString(pub.getPublicExponent().toByteArray());
-		keyMap.put(PwcSecurityConstants.KEY_ID, publicKeyId);
-		keyMap.put(PwcSecurityConstants.USE,PwcSecurityConstants.USE_SIG);
-		keyMap.put(PwcSecurityConstants.KTY, pub.getAlgorithm());
-		keyMap.put(PwcSecurityConstants.EXPONENT, encodedExponent);
-		keyMap.put(PwcSecurityConstants.MODULUS, encoodedModulus);
-		keyMap.put(PwcSecurityConstants.ALG,PwcSecurityConstants.RS256);
+		keyMap.put(AOSecurityConstants.KEY_ID, publicKeyId);
+		keyMap.put(AOSecurityConstants.USE,AOSecurityConstants.USE_SIG);
+		keyMap.put(AOSecurityConstants.KTY, pub.getAlgorithm());
+		keyMap.put(AOSecurityConstants.EXPONENT, encodedExponent);
+		keyMap.put(AOSecurityConstants.MODULUS, encoodedModulus);
+		keyMap.put(AOSecurityConstants.ALG,AOSecurityConstants.RS256);
 		return keyMap;
 	}
 

@@ -1,6 +1,6 @@
 package com.alpha.omega.security.userdetails;
 
-import com.enterprise.pwc.datalabs.security.context.UserContextPermissions;
+import com.alpha.omega.security.context.UserContextPermissions;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

@@ -1,7 +1,7 @@
 package com.alpha.omega.security.authentication;
 
+import com.alpha.omega.security.model.UserProfile;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import com.pwc.base.model.UserProfile;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 

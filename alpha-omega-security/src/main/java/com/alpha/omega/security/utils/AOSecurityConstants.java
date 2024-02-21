@@ -1,4 +1,4 @@
-package com.alpha.omega.security.security;
+package com.alpha.omega.security.utils;
 
 public class AOSecurityConstants {
 
@@ -42,6 +42,6 @@ public class AOSecurityConstants {
 	public static final String DEFAULT_CONTEXT_ID = "default";
 	public static final String SECURITY_AUTHENTICATION = "security.authentication";
 
-	public static final String PWC_SECURITY_SERVICE = "pwc.security";
+	public static final String AO_SECURITY = "ao.security";
 
 }

@@ -10,7 +10,7 @@ import java.lang.annotation.*;
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-@Import({PwcSecurityReactiveConfig.class})
+//@Import({AOSecurityReactiveConfig.class})
 @EnableReactiveMethodSecurity
 @EnableWebFluxSecurity
 public @interface EnableAOSecurityReactive {

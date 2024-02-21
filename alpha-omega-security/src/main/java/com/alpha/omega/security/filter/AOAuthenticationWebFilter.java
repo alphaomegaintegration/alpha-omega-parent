@@ -1,9 +1,7 @@
 package com.alpha.omega.security.filter;
 
-import com.enterprise.pwc.datalabs.security.PwcSecurityConstants;
-import com.enterprise.pwc.datalabs.security.authentication.PwcBaseAuthenticationException;
-import com.pwc.base.exceptions.PwcBaseException;
-import com.pwc.base.utils.BaseConstants;
+import com.alpha.omega.core.exception.AOBaseException;
+import com.alpha.omega.security.authentication.AOBaseAuthenticationException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.core.log.LogMessage;
@@ -31,6 +29,9 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.function.Function;
 
+import static com.alpha.omega.core.Constants.CORRELATION_ID;
+import static com.alpha.omega.security.utils.AOSecurityConstants.SECURITY_AUTHENTICATION;
+
 public class AOAuthenticationWebFilter implements WebFilter {
 
 	/*
@@ -38,7 +39,7 @@ public class AOAuthenticationWebFilter implements WebFilter {
 			org.springframework.boot.actuate.autoconfigure.security.reactive.ReactiveManagementWebSecurityAutoConfiguration
 			 */
 	private static Logger logger = LogManager.getLogger(AOAuthenticationWebFilter.class);
-	private PwcServerAuthenticationEntryPoint entryPoint = new PwcServerAuthenticationEntryPoint();
+	private AOServerAuthenticationEntryPoint entryPoint = new AOServerAuthenticationEntryPoint();
 	private ReactiveAuthenticationManagerResolver<ServerWebExchange> authenticationManagerResolver;
 	private ServerAuthenticationSuccessHandler authenticationSuccessHandler = new WebFilterChainServerAuthenticationSuccessHandler();
 	private ServerAuthenticationConverter authenticationConverter = new ServerHttpBasicAuthenticationConverter();
@@ -52,31 +53,31 @@ public class AOAuthenticationWebFilter implements WebFilter {
 		this.authenticationManagerResolver = (request) -> {
 			return Mono.just(authenticationManager);
 		};
-		logger.info("---------- Created PwcAuthenticationWebFilter with authenticationManagerResolver => {}",
+		logger.info("---------- Created AOAuthenticationWebFilter with authenticationManagerResolver => {}",
 				authenticationManagerResolver);
 	}
 
 	public AOAuthenticationWebFilter(ReactiveAuthenticationManagerResolver<ServerWebExchange> authenticationManagerResolver) {
 		Assert.notNull(authenticationManagerResolver, "authenticationResolverManager cannot be null");
 		this.authenticationManagerResolver = authenticationManagerResolver;
-		logger.info("---------- Created PwcAuthenticationWebFilter with authenticationManagerResolver => {}",
+		logger.info("---------- Created AOAuthenticationWebFilter with authenticationManagerResolver => {}",
 				this.authenticationManagerResolver);
 	}
 
 	@PostConstruct
 	public void init() {
-		logger.info("---------- Created PwcAuthenticationWebFilter with authenticationManagerResolver => {}",
+		logger.info("---------- Created AOAuthenticationWebFilter with authenticationManagerResolver => {}",
 				authenticationManagerResolver);
 	}
 
 	public Mono<Void> filter(ServerWebExchange exchange, WebFilterChain chain) {
 		return this.requiresAuthenticationMatcher.matches(exchange)
-				.doOnNext(matchResult -> logger.debug("PwcAuthenticationWebFilter.filter matchResult.isMatch() => {} with variables => {}",
+				.doOnNext(matchResult -> logger.debug("AOAuthenticationWebFilter.filter matchResult.isMatch() => {} with variables => {}",
 						matchResult.isMatch(), matchResult.getVariables()))
 				.filter((matchResult) -> matchResult.isMatch())
 				.map(extractURLVariables(exchange))
 				.flatMap((matchResult) -> this.authenticationConverter.convert(exchange))
-				//.doOnNext((authentication -> logger.debug("PwcAuthenticationWebFilter.filter Got authentication => {}", authentication)))
+				//.doOnNext((authentication -> logger.debug("AOAuthenticationWebFilter.filter Got authentication => {}", authentication)))
 				.switchIfEmpty(Mono.defer(() -> chain.filter(exchange).then(Mono.empty())))
 				.flatMap((token) -> this.authenticate(exchange, chain, token))
 				.onErrorResume(AuthenticationException.class, (ex) -> {  //AuthenticationException
@@ -85,19 +86,19 @@ public class AOAuthenticationWebFilter implements WebFilter {
 					}
 					return this.authenticationFailureHandler.onAuthenticationFailure(new WebFilterExchange(exchange, chain), ex);
 				})
-				.onErrorResume(PwcBaseException.class, (ex) -> {
+				.onErrorResume(AOBaseException.class, (ex) -> {
 					if (logger.isDebugEnabled()) {
 						ex.printStackTrace();
 					}
-					return this.authenticationFailureHandler.onAuthenticationFailure(new WebFilterExchange(exchange, chain), new PwcBaseAuthenticationException(ex.getMessage(), ex));
+					return this.authenticationFailureHandler.onAuthenticationFailure(new WebFilterExchange(exchange, chain), new AOBaseAuthenticationException(ex.getMessage()));
 				}).onErrorResume(Exception.class, (ex) -> {
 					if (logger.isDebugEnabled()) {
 						ex.printStackTrace();
 					}
 					return this.entryPoint.handleResponse(new WebFilterExchange(exchange, chain), ex);
 				})
-				.contextWrite(Context.of(BaseConstants.CORRELATION_ID,
-						exchange.getAttributeOrDefault(BaseConstants.CORRELATION_ID, UUID.randomUUID().toString())));
+				.contextWrite(Context.of(CORRELATION_ID,
+						exchange.getAttributeOrDefault(CORRELATION_ID, UUID.randomUUID().toString())));
 		/*
 		https://spring.io/blog/2023/03/28/context-propagation-with-project-reactor-1-the-basics
 		 */
@@ -140,7 +141,7 @@ public class AOAuthenticationWebFilter implements WebFilter {
 		ServerWebExchange exchange = webFilterExchange.getExchange();
 		SecurityContextImpl securityContext = new SecurityContextImpl();
 		securityContext.setAuthentication(authentication);
-		webFilterExchange.getExchange().getAttributes().put(PwcSecurityConstants.SECURITY_AUTHENTICATION, authentication);
+		webFilterExchange.getExchange().getAttributes().put(SECURITY_AUTHENTICATION, authentication);
 		return this.securityContextRepository.save(exchange, securityContext)
 				.then(this.authenticationSuccessHandler.onAuthenticationSuccess(webFilterExchange, authentication))
 				.contextWrite(ctx -> ReactiveSecurityContextHolder.withSecurityContext(Mono.just(securityContext)));

@@ -1,6 +1,5 @@
 package com.alpha.omega.security.filter;
 
-import com.pwc.base.filter.tracing.RequestLoggingWebFilter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.security.authentication.ReactiveAuthenticationManagerResolver;
@@ -15,7 +14,7 @@ import org.springframework.web.server.WebFilter;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class DefaultAOSecurityWebFilterChainFactory implements PwcSecurityWebFilterChainFactory {
+public class DefaultAOSecurityWebFilterChainFactory implements AOSecurityWebFilterChainFactory {
 
 	private static Logger logger = LogManager.getLogger(DefaultAOSecurityWebFilterChainFactory.class);
 
@@ -30,29 +29,21 @@ public class DefaultAOSecurityWebFilterChainFactory implements PwcSecurityWebFil
 	}
 
 	@Override
-	public SecurityWebFilterChain createSecurityWebFilterChain(PwcRxSecurityWebFilterChainRequest filterChainRequest) {
+	public SecurityWebFilterChain createSecurityWebFilterChain(AORxSecurityWebFilterChainRequest filterChainRequest) {
 
 		logger.info("Creating SecurityWebFilterChain for request filterChainRequest => {}", filterChainRequest);
 		validate(filterChainRequest);
 		ServerHttpSecurity http = filterChainRequest.getHttpSecurity();
 
-		ServerWebExchangeMatcher pwcServerWebExchangeMatcher = pwcServerWebExchangeMatcher(filterChainRequest.getProtectedUrls(), filterChainRequest.getProtectedUrlsMethod());
-		WebFilter webFilter = pwcAuthenticationWebFilter(filterChainRequest.getResolver(), filterChainRequest.getConverter(),
-				pwcServerWebExchangeMatcher);
-		WebFilter urlNotFoundFilter = new PwcHttpNotFoundWebFilter(urlNotFoundServerWebExchangeMatcher);
+		ServerWebExchangeMatcher aoServerWebExchangeMatcher = aoServerWebExchangeMatcher(filterChainRequest.getProtectedUrls(), filterChainRequest.getProtectedUrlsMethod());
+		WebFilter webFilter = aoAuthenticationWebFilter(filterChainRequest.getResolver(), filterChainRequest.getConverter(),
+				aoServerWebExchangeMatcher);
+		WebFilter urlNotFoundFilter = new AOHttpNotFoundWebFilter(urlNotFoundServerWebExchangeMatcher);
 
-		WebFilter requestLoggingWebFilter = new RequestLoggingWebFilter(filterChainRequest.getLoggableRequestHeadersStr(),
-				filterChainRequest.getLogFilterHandler());
 
 		filterChainRequest.getWebFilters().add(WebFilterPosition.newBuilder()
 				.setWebFilter(urlNotFoundFilter)
 				.setOrder(SecurityWebFiltersOrder.AUTHENTICATION)
-				.setPosition(WebFilterPosition.OtherWebFilter.BEFORE)
-				.build());
-
-		filterChainRequest.getWebFilters().add(WebFilterPosition.newBuilder()
-				.setWebFilter(requestLoggingWebFilter)
-				.setOrder(SecurityWebFiltersOrder.HTTP_HEADERS_WRITER)
 				.setPosition(WebFilterPosition.OtherWebFilter.BEFORE)
 				.build());
 
@@ -62,7 +53,7 @@ public class DefaultAOSecurityWebFilterChainFactory implements PwcSecurityWebFil
 				.setPosition(WebFilterPosition.OtherWebFilter.AT)
 				.build());
 
-		http
+		/*http
 				.exceptionHandling()
 				.and()
 				//.addFilterBefore(requestLoggingWebFilter, SecurityWebFiltersOrder.HTTP_HEADERS_WRITER)
@@ -79,7 +70,7 @@ public class DefaultAOSecurityWebFilterChainFactory implements PwcSecurityWebFil
 
 		if (filterChainRequest.isDisableCSRF()) {
 			http.csrf().disable();
-		}
+		}*/
 
 		filterChainRequest.getWebFilters().forEach(wf -> {
 			if (wf.getPosition() == WebFilterPosition.OtherWebFilter.BEFORE) {
@@ -96,11 +87,11 @@ public class DefaultAOSecurityWebFilterChainFactory implements PwcSecurityWebFil
 
 	}
 
-	WebFilter pwcAuthenticationWebFilter(ReactiveAuthenticationManagerResolver<ServerWebExchange> resolver,
+	WebFilter aoAuthenticationWebFilter(ReactiveAuthenticationManagerResolver<ServerWebExchange> resolver,
 										 ServerAuthenticationConverter converter,
-										 ServerWebExchangeMatcher pwcServerWebExchangeMatcher) {
-		PwcAuthenticationWebFilter webFilter = new PwcAuthenticationWebFilter(resolver);
-		webFilter.setRequiresAuthenticationMatcher(pwcServerWebExchangeMatcher);
+										 ServerWebExchangeMatcher aoServerWebExchangeMatcher) {
+		AOAuthenticationWebFilter webFilter = new AOAuthenticationWebFilter(resolver);
+		webFilter.setRequiresAuthenticationMatcher(aoServerWebExchangeMatcher);
 		webFilter.setServerAuthenticationConverter(converter);
 		return webFilter;
 	}
@@ -116,7 +107,7 @@ public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) {
 	return http.build();
 }
 
-public SecurityFilterChain createSecurityFilterChain(PwcSecurityFilterChainRequest filterChainRequest);
+public SecurityFilterChain createSecurityFilterChain(aoSecurityFilterChainRequest filterChainRequest);
 	 */
 
 	static String[] convertCollectionToStringArray(Collection<String> collection) {

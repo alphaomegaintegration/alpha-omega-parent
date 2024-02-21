@@ -1,7 +1,8 @@
 package com.alpha.omega.security.authentication;
 
-import com.enterprise.pwc.datalabs.security.PwcSecurityConstants;
-import com.enterprise.pwc.datalabs.security.permission.PwcSimpleAuthority;
+import com.alpha.omega.security.model.UserProfile;
+import com.alpha.omega.security.permission.AOSimpleAuthority;
+import com.alpha.omega.security.utils.AOSecurityConstants;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JacksonException;
@@ -9,7 +10,6 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
-import com.pwc.base.model.UserProfile;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.util.Assert;
@@ -22,8 +22,9 @@ import java.util.Locale;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static com.enterprise.pwc.datalabs.security.PwcSecurityConstants.AUTHORITIES_CANNOT_BE_NULL_OR_EMPTY;
-import static com.enterprise.pwc.datalabs.security.PwcSecurityConstants.USER_PROFILE_CANNOT_BE_NULL;
+import static com.alpha.omega.security.utils.AOSecurityConstants.AUTHORITIES_CANNOT_BE_NULL_OR_EMPTY;
+import static com.alpha.omega.security.utils.AOSecurityConstants.USER_PROFILE_CANNOT_BE_NULL;
+
 //@JsonDeserialize(using = UserProfileAuthentication.UserProfileAuthenticationDeserializer.class)
 public class UserProfileAuthentication implements Authentication {
 
@@ -77,7 +78,7 @@ public class UserProfileAuthentication implements Authentication {
 
 	@Override
 	public void setAuthenticated(boolean b) throws IllegalArgumentException {
-		throw new IllegalArgumentException(PwcSecurityConstants.CANNOT_SET_AUTHENTICATION);
+		throw new IllegalArgumentException(AOSecurityConstants.CANNOT_SET_AUTHENTICATION);
 	}
 
 	@Override
@@ -95,7 +96,7 @@ public class UserProfileAuthentication implements Authentication {
 	}
 
 	public boolean containsAuthority(String permission){
-		return getAuthorities().contains(new PwcSimpleAuthority(permission));
+		return getAuthorities().contains(new AOSimpleAuthority(permission));
 	}
 
 	public boolean containsAuthorities(List<String> permissions){

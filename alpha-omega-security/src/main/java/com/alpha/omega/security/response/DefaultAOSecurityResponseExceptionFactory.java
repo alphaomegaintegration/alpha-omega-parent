@@ -1,46 +1,37 @@
 package com.alpha.omega.security.response;
 
-import com.enterprise.pwc.datalabs.security.authentication.PwcBaseAuthenticationException;
-import com.enterprise.pwc.datalabs.security.authorization.PwcNoAuthorizationsException;
-import com.enterprise.pwc.datalabs.security.token.PwcTokenVerificationException;
-import com.pwc.base.exceptions.PwCBadRequestException;
-import com.pwc.base.exceptions.PwcConflictException;
-import com.pwc.base.exceptions.PwcNotFoundException;
-import com.pwc.base.exceptions.auth.PwcAuthenticationException;
-import com.pwc.base.log.PWCLogUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.beans.TypeMismatchException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.authentication.BadCredentialsException;
 
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
 
-import static com.pwc.base.utils.BaseConstants.CORRELATION_ID;
+import static com.alpha.omega.core.Constants.CORRELATION_ID;
+import static com.alpha.omega.security.utils.AOSecurityUtils.getStackTraceAsList;
 
-public class DefaultAOSecurityResponseExceptionFactory implements PwcSecurityResponseExceptionFactory {
+public class DefaultAOSecurityResponseExceptionFactory implements AOSecurityResponseExceptionFactory {
 	private static Logger logger = LogManager.getLogger(DefaultAOSecurityResponseExceptionFactory.class);
 
 	@Override
-	public PwcSecurityResponse createPwcSecurityResponse(Exception exception, HttpHeaders httpHeaders) {
+	public AOSecurityResponse createAOSecurityResponse(Exception exception, HttpHeaders httpHeaders) {
 
-		logger.info("createPwcSecurityResponse Handling exception => {}", exception.getClass().getName(), exception);
-		final List<String> content = logger.isDebugEnabled() ? PWCLogUtils.getStackTraceAsList(exception) :
+		logger.info("createAOSecurityResponse Handling exception => {}", exception.getClass().getName(), exception);
+		final List<String> content = logger.isDebugEnabled() ? getStackTraceAsList(exception) :
 				Collections.singletonList(exception.getMessage());
 		final String correlationId = httpHeaders.getFirst(CORRELATION_ID);
 		final HttpStatus httpStatus = mappedFromException(exception);
 		LocalDateTime now = LocalDateTime.now();
-		PwcSecurityResponse pwcSecurityResponse = PwcSecurityResponse.newBuilder()
-				.setMessage(content)
-				.setCorrelationId(correlationId)
-				.setStatus(httpStatus)
-				.setTimestamp(now)
+		AOSecurityResponse aoSecurityResponse = AOSecurityResponse.builder()
+				.message(content)
+				.correlationId(correlationId)
+				.status(httpStatus)
+				.timestamp(now)
 				.build();
 
-		return pwcSecurityResponse;
+		return aoSecurityResponse;
 	}
 
 	HttpStatus mappedFromException(Exception exception) {
@@ -49,25 +40,25 @@ public class DefaultAOSecurityResponseExceptionFactory implements PwcSecurityRes
 			httpStatus = HttpStatus.BAD_REQUEST;
 		} else if (exception instanceof NullPointerException) {
 			httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
-		} else if (exception instanceof PwcNotFoundException) {
+		} /*else if (exception instanceof AONotFoundException) {
 			httpStatus = HttpStatus.NOT_FOUND;
-		} else if (exception instanceof PwCBadRequestException) {
+		} else if (exception instanceof AOBadRequestException) {
 			httpStatus = HttpStatus.BAD_REQUEST;
 		}else if (exception instanceof TypeMismatchException) {
 			httpStatus = HttpStatus.BAD_REQUEST;
-		} else if (exception instanceof PwcConflictException) {
+		} else if (exception instanceof AOConflictException) {
 			httpStatus = HttpStatus.CONFLICT;
-		} else if (exception instanceof PwcNoAuthorizationsException) {
+		} else if (exception instanceof AONoAuthorizationsException) {
 			httpStatus = HttpStatus.FORBIDDEN;
-		} else if (exception instanceof PwcBaseAuthenticationException) {
+		} else if (exception instanceof AOBaseAuthenticationException) {
 			httpStatus = mappedFromException((Exception) exception.getCause());
-		} else if (exception instanceof PwcAuthenticationException) {
+		} else if (exception instanceof AOAuthenticationException) {
 			httpStatus = HttpStatus.UNAUTHORIZED;
 		} else if (exception instanceof BadCredentialsException) {
 			httpStatus = HttpStatus.UNAUTHORIZED;
-		} else if (exception instanceof PwcTokenVerificationException) {
+		} else if (exception instanceof AOTokenVerificationException) {
 			httpStatus = HttpStatus.UNAUTHORIZED;
-		} else {
+		} */ else {
 			httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
 		}
 		logger.debug("translating exception {} to HttpStatus => {}", exception, httpStatus);

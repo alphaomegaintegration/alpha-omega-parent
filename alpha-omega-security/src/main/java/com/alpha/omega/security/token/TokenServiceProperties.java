@@ -2,14 +2,14 @@ package com.alpha.omega.security.token;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-@ConfigurationProperties(prefix = "pwc.token-service")
+@ConfigurationProperties(prefix = "ao.token-service")
 public class TokenServiceProperties {
 
 	private int maxRetries;
 	private long timeSkewSeconds;
 	private TokenValidator tokenValidator = TokenValidator.token_service;
 	private TokenServiceInvalidation tokenServiceInvalidation = TokenServiceInvalidation.noop_false;
-	private TokenClaimsIssuerMapping tokenClaimsIssuerMapping = TokenClaimsIssuerMapping.pwc_identity;
+	private TokenClaimsIssuerMapping tokenClaimsIssuerMapping = TokenClaimsIssuerMapping.ao_identity;
 
 	public int getMaxRetries() {
 		return maxRetries;
@@ -60,6 +60,6 @@ public class TokenServiceProperties {
 	}
 
 	public enum TokenClaimsIssuerMapping{
-		pwc_identity, idbroker;
+		ao_identity, idbroker;
 	}
 }

@@ -1,4 +1,4 @@
-package com.pwc.base.alerts;
+package com.alpha.omega.core.alerts;
 
 import java.util.Optional;
 import java.util.function.Supplier;
