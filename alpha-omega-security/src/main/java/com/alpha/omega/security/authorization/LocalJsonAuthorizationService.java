@@ -109,12 +109,12 @@ public class LocalJsonAuthorizationService implements AuthorizationService {
 		}
 
 		private UserContextPermissions extractUser(JsonNode jsonNode) {
-			return UserContextPermissions.newBuilder()
-					.setPermissions(jsonNode.isArray() ?
+			return UserContextPermissions.builder()
+					.permissions(jsonNode.isArray() ?
 							ImmutableList.copyOf(jsonNode).stream().map(jsonNode1 -> jsonNode1.asText()).collect(Collectors.toSet())
 							: Collections.EMPTY_SET)
-					.setContextId(jsonNode.get("contextId").asText())
-					.setUsername(jsonNode.get("username").asText())
+					.contextId(jsonNode.get("contextId").asText())
+					.username(jsonNode.get("username").asText())
 					.build();
 		}
 

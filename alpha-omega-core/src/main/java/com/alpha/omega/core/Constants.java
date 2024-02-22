@@ -77,6 +77,13 @@ public class Constants {
     public static final String SPACE_STR = " ";
     public static final String COLON = ":";
     public static final String PERIOD = ".";
+
+    public static final String COMMA = ",";
+    public static final String SPACE = " ";
+    public static final String STAR = "*";
+    public static final String DASH = "-";
+    public static final String QUESTION_MARK = "?";
+    public final static char DOUBLE_QUOTES = '"';
     public static final String ADD_PROVIDER = "aad";
 
     public static final String[] DEFAULT_IGNORE_URLS_ARRAY = {
