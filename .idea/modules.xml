@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/alpha-omega-aws.iml" filepath="$PROJECT_DIR$/alpha-omega-aws.iml" />
       <module fileurl="file://$PROJECT_DIR$/alpha-omega-batch/alpha-omega-batch.iml" filepath="$PROJECT_DIR$/alpha-omega-batch/alpha-omega-batch.iml" />
       <module fileurl="file://$PROJECT_DIR$/alpha-omega-core/alpha-omega-core.iml" filepath="$PROJECT_DIR$/alpha-omega-core/alpha-omega-core.iml" />
       <module fileurl="file://$PROJECT_DIR$/alpha-omega-security/alpha-omega-security.iml" filepath="$PROJECT_DIR$/alpha-omega-security/alpha-omega-security.iml" />
