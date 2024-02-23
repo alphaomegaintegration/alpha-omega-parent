@@ -7,25 +7,29 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="alpha-omega-core" />
-        <module name="alpha-omega-cdk" />
+        <module name="alpha-omega-batch" />
+        <module name="alpha-omega-cache" />
       </profile>
       <profile name="Annotation profile for alpha-omega-parent" enabled="true">
-        <sourceOutputDir name="target/generated-sources/annotations" />
-        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <sourceOutputDir name="../target/generated-sources/annotations" />
+        <sourceTestOutputDir name="../target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <processorPath useClasspath="false">
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.30/lombok-1.18.30.jar" />
-          <entry name="$MAVEN_REPOSITORY$/org/mapstruct/mapstruct-processor/1.5.5.Final/mapstruct-processor-1.5.5.Final.jar" />
-          <entry name="$MAVEN_REPOSITORY$/org/mapstruct/mapstruct/1.5.5.Final/mapstruct-1.5.5.Final.jar" />
-        </processorPath>
         <module name="alpha-omega-security" />
+        <module name="alpha-omega-aws" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="alpha-omega-cdk" target="17" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="alpha-omega-aws" options="" />
+      <module name="alpha-omega-batch" options="-parameters" />
+      <module name="alpha-omega-cache" options="-parameters" />
       <module name="alpha-omega-cdk" options="-parameters" />
-      <module name="alpha-omega-security" options="-parameters" />
+      <module name="alpha-omega-core" options="-parameters" />
+      <module name="alpha-omega-security" options="" />
     </option>
   </component>
 </project>

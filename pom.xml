@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.1.5</version>
+        <version>3.2.2</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.alpha.omega</groupId>
@@ -16,6 +16,7 @@
     <description>alpha-omega-parent</description>
     <properties>
         <java.version>17</java.version>
+        <aws.java.sdk.version>2.23.20</aws.java.sdk.version>
         <spring-cloud.version>2022.0.4</spring-cloud.version>
         <spring-data-bom-version>2022.0.4</spring-data-bom-version>
         <spring.security.bom.version>6.1.3</spring.security.bom.version>
@@ -29,11 +30,15 @@
         <maven.surefire.plugin.version>3.0.0-M7</maven.surefire.plugin.version>
         <gmaven-plus.plugin.version>3.0.0</gmaven-plus.plugin.version>
         <maven.surefire.plugin.version>3.0.0-M7</maven.surefire.plugin.version>
+        <mapstruct.version>1.5.5.Final</mapstruct.version>
     </properties>
 
     <modules>
         <module>alpha-omega-core</module>
+        <module>alpha-omega-cache</module>
+        <module>alpha-omega-batch</module>
         <module>alpha-omega-security</module>
+        <module>alpha-omega-aws</module>
     </modules>
 
     <dependencies>
@@ -90,6 +95,27 @@
             <artifactId>spring-boot-configuration-processor</artifactId>
             <optional>true</optional>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.bouncycastle/bcpkix-jdk18on -->
+        <dependency>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcpkix-jdk18on</artifactId>
+            <version>1.77</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.auth0/java-jwt -->
+        <dependency>
+            <groupId>com.auth0</groupId>
+            <artifactId>java-jwt</artifactId>
+            <version>4.4.0</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.auth0/jwks-rsa -->
+        <dependency>
+            <groupId>com.auth0</groupId>
+            <artifactId>jwks-rsa</artifactId>
+            <version>0.22.1</version>
+        </dependency>
+
 
     </dependencies>
     <dependencyManagement>
@@ -179,7 +205,13 @@
                 <artifactId>mapstruct</artifactId>
                 <version>${mapstruct.version}</version>
             </dependency>
-
+            <dependency>
+                <groupId>software.amazon.awssdk</groupId>
+                <artifactId>bom</artifactId>
+                <version>${aws.java.sdk.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -223,7 +255,6 @@
                                 <artifactId>lombok</artifactId>
                                 <version>${lombok.version}</version>
                             </path>
-                            <!--Maps Struct compile preprocessor-->
                             <path>
                                 <groupId>org.mapstruct</groupId>
                                 <artifactId>mapstruct-processor</artifactId>
