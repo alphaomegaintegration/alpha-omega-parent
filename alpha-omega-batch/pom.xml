@@ -8,7 +8,7 @@
         <version>0.0.1-SNAPSHOT</version>
         <!--relativePath></relativePath-->
     </parent>
-    <groupId>com.alpha.omega.batch</groupId>
+    <groupId>com.alpha.omega</groupId>
     <artifactId>alpha-omega-batch</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>alpha-omega-batch</name>
