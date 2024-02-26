@@ -7,16 +7,14 @@
     -->
     <profiles>
         <profile>
-            <id>alphaomega-repo-alpha-omega-repo</id>
+            <id>alpha-omega-code-ao-java-repo</id>
             <activation>
-                <activeByDefault>false</activeByDefault>
+                <activeByDefault>true</activeByDefault>
             </activation>
             <repositories>
                 <repository>
-                    <id>alphaomega-repo-alpha-omega-repo</id>
-                    <url>
-                        https://alphaomega-repo-127418365645.d.codeartifact.us-east-1.amazonaws.com/maven/alpha-omega-repo/
-                    </url>
+                    <id>alpha-omega-code-ao-java-repo</id>
+                    <url>https://alpha-omega-code-127418365645.d.codeartifact.us-east-1.amazonaws.com/maven/ao-java-repo/</url>
                 </repository>
             </repositories>
         </profile>
@@ -47,7 +45,7 @@
     -->
     <servers>
         <server>
-            <id>alphaomega-repo-alpha-omega-repo</id>
+            <id>alpha-omega-code-ao-java-repo</id>
             <username>aws</username>
             <password>${env.CODEARTIFACT_AUTH_TOKEN}</password>
         </server>

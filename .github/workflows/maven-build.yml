@@ -36,7 +36,7 @@ jobs:
       - name: Build and publish
         run: |
           export CODEARTIFACT_AUTH_TOKEN=$(aws codeartifact get-authorization-token --region us-east-1 --domain alphaomega-repo --domain-owner 127418365645 --query authorizationToken --output text)
-          ./mvnw -s settings.xml clean deploy -P alphaomega-repo-alpha-omega-repo
+          ./mvnw -s settings.xml clean deploy -P alpha-omega-code-ao-java-repo
 
 
 
