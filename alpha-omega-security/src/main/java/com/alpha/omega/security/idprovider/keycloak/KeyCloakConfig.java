@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 import java.util.function.Function;
 
 
-@Configuration
+//@Configuration
 @EnableConfigurationProperties(value = {KeyCloakIdpProperties.class})
 public class KeyCloakConfig {
 
