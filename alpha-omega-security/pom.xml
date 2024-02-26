@@ -127,18 +127,9 @@
 
     <distributionManagement>
 
-        <!--
         <repository>
-            <id>github</id>
-            <name>GitHub OWNER Apache Maven Packages</name>
-            <url>https://maven.pkg.github.com/alphaomegaintegration/alpha-omega-parent</url>
-        </repository>
-        -->
-
-        <repository>
-            <id>alphaomega-repo-alpha-omega-repo</id>
-            <name>alphaomega-repo-alpha-omega-repo</name>
-            <url>https://alphaomega-repo-127418365645.d.codeartifact.us-east-1.amazonaws.com/maven/alpha-omega-repo/</url>
+            <id>alpha-omega-code-ao-java-repo</id>
+            <url>https://alpha-omega-code-127418365645.d.codeartifact.us-east-1.amazonaws.com/maven/ao-java-repo/</url>
         </repository>
 
     </distributionManagement>
