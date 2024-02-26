@@ -79,7 +79,6 @@ com/alpha/omega/security/client/BasicServerWebExchangeConvertor.class
 com/alpha/omega/security/client/ClientRegistrationEntityRepository.class
 com/alpha/omega/security/response/AOSecurityResponse$AOSecurityResponseBuilder.class
 com/alpha/omega/security/config/EnableAOSecurityReactive.class
-com/alpha/omega/security/idprovider/keycloak/KeycloakJwtRolesConverter.class
 com/alpha/omega/security/idprovider/keycloak/KeyCloakReactiveAuthenticationManagerResolver.class
 com/alpha/omega/security/client/RedisReactiveClientRegistrationRepository$RedisReactiveClientRegistrationRepositoryBuilder.class
 com/alpha/omega/security/idprovider/keycloak/KeyCloakInitializer.class
@@ -99,7 +98,6 @@ com/alpha/omega/security/context/AOSecurityContext$AOSecurityContextBuilderImpl.
 com/alpha/omega/security/rx/AORxAuthenticationConvertor.class
 com/alpha/omega/security/context/UserContextPermissionsService.class
 com/alpha/omega/security/key/PublicKeyResolverProperties.class
-com/alpha/omega/security/idprovider/keycloak/KeycloakJwtRolesReactiveConverter.class
 com/alpha/omega/security/authorization/ZippedAuthorizationService$BiZipAuthorizationResponse.class
 com/alpha/omega/security/authorization/NOOPAuthorizationService.class
 com/alpha/omega/security/filter/WebFilterPosition.class
