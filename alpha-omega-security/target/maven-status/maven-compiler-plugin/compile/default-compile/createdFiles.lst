@@ -80,6 +80,7 @@ com/alpha/omega/security/client/ClientRegistrationEntityRepository.class
 com/alpha/omega/security/response/AOSecurityResponse$AOSecurityResponseBuilder.class
 com/alpha/omega/security/config/EnableAOSecurityReactive.class
 com/alpha/omega/security/idprovider/keycloak/KeyCloakReactiveAuthenticationManagerResolver.class
+com/alpha/omega/security/key/KeyUtils$SecureTextRandomProvider.class
 com/alpha/omega/security/client/RedisReactiveClientRegistrationRepository$RedisReactiveClientRegistrationRepositoryBuilder.class
 com/alpha/omega/security/idprovider/keycloak/KeyCloakInitializer.class
 com/alpha/omega/security/model/UserProfile.class
@@ -149,7 +150,6 @@ com/alpha/omega/security/idprovider/keycloak/KeyCloakUtils$1.class
 com/alpha/omega/security/authentication/AOAuthenticationConvertor$AOAuthenticationConvertorBuilderImpl.class
 com/alpha/omega/security/authentication/AOBaseAuthenticationException.class
 com/alpha/omega/security/authentication/UserProfileAuthentication.class
-com/alpha/omega/security/idprovider/keycloak/KeyCloakConfig.class
 com/alpha/omega/security/response/AOSecurityResponse.class
 com/alpha/omega/security/authentication/HttpServletRequestToRequestMap.class
 com/alpha/omega/security/model/UserProfile$UserProfileBuilder.class

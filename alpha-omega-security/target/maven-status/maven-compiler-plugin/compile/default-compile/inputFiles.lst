@@ -1,6 +1,5 @@
 /Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/utils/AOSecurityChecker.java
 /Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/authorization/NOOPAuthorizationService.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/idprovider/keycloak/KeyCloakConfig.java
 /Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/authorization/ZippedAuthorizationService.java
 /Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/authentication/RequestToRequestMap.java
 /Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/authorization/InMemoryAuthorizationService.java

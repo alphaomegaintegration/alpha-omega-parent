@@ -62,7 +62,7 @@ public class KeyCloakAuthenticationManager extends AbstractUserDetailsReactiveAu
     public static final String ISSUER_CLIENT_URI = "/realms/{realm}";
 
     private String defaultContext;
-    private UserContextPermissionsService userContextService;
+    private UserContextPermissionsService userContextPermissionsService;
     @Builder.Default
     private Scheduler scheduler = Schedulers.boundedElastic();
     String realmBaseUrl;
@@ -113,7 +113,7 @@ public class KeyCloakAuthenticationManager extends AbstractUserDetailsReactiveAu
 
         return Mono.just(userContextRequest)
                 .publishOn(this.scheduler)
-                .flatMap(request -> userContextService.getUserContextByUserIdAndContextId(request))
+                .flatMap(request -> userContextPermissionsService.getUserContextByUserIdAndContextId(request))
                 .map(SecurityUtils.convertUserContextPermissionsToUserDetails());
     }
 
@@ -122,7 +122,7 @@ public class KeyCloakAuthenticationManager extends AbstractUserDetailsReactiveAu
 
         return Mono.just(userContextRequest)
                 .publishOn(this.scheduler)
-                .flatMap(request -> userContextService.getUserContextByUserIdAndContextId(request))
+                .flatMap(request -> userContextPermissionsService.getUserContextByUserIdAndContextId(request))
                 .map(SecurityUtils.convertUserContextPermissionsToUserDetails());
     }
 
@@ -140,7 +140,7 @@ public class KeyCloakAuthenticationManager extends AbstractUserDetailsReactiveAu
                     .build();
             return Mono.just(userContextRequest)
                     .publishOn(this.scheduler)
-                    .flatMap(request -> userContextService.getUserContextByUserIdAndContextId(request))
+                    .flatMap(request -> userContextPermissionsService.getUserContextByUserIdAndContextId(request))
                     .map(SecurityUtils.convertUserContextPermissionsToUserDetails(jwt));
 
         } else {

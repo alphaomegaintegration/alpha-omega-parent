@@ -22,6 +22,10 @@ public class UserContextPermissions {
 	protected String username;
 	protected String userId;
 	protected String contextId;
+	protected String roleId;
+	@Builder.Default
+	protected Boolean enabled = Boolean.FALSE;
+	@Builder.Default
 	protected Set<String> permissions = new HashSet<>();
 
 }
