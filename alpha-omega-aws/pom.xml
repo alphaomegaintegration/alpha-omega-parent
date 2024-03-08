@@ -71,4 +71,13 @@
             <scope>compile</scope>
         </dependency>
     </dependencies>
+
+    <distributionManagement>
+
+        <repository>
+            <id>alpha-omega-code-ao-java-repo</id>
+            <url>https://alpha-omega-code-127418365645.d.codeartifact.us-east-1.amazonaws.com/maven/ao-java-repo/</url>
+        </repository>
+
+    </distributionManagement>
 </project>

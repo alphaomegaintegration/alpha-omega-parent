@@ -12,6 +12,7 @@ com/alpha/omega/security/token/InvalidatedTokenResponse$InvalidatedTokenResponse
 com/alpha/omega/security/authentication/PreAuthenticationPrincipal.class
 com/alpha/omega/security/context/AOSecurityContext.class
 com/alpha/omega/security/userdetails/UCPUserDetails.class
+com/alpha/omega/security/context/DefaultUserContextPermissionsService.class
 com/alpha/omega/security/idprovider/keycloak/KeyCloakInitializer$KeycloakInitializerConfigurationProperties$KeycloakInitializerConfigurationPropertiesBuilder.class
 com/alpha/omega/security/idprovider/keycloak/KeyCloakJwtDecoderFactory.class
 com/alpha/omega/security/filter/AORxSecurityWebFilterChainRequest$AORxSecurityWebFilterChainRequestBuilder.class
@@ -79,8 +80,8 @@ com/alpha/omega/security/client/BasicServerWebExchangeConvertor.class
 com/alpha/omega/security/client/ClientRegistrationEntityRepository.class
 com/alpha/omega/security/response/AOSecurityResponse$AOSecurityResponseBuilder.class
 com/alpha/omega/security/config/EnableAOSecurityReactive.class
-com/alpha/omega/security/idprovider/keycloak/KeycloakJwtRolesConverter.class
 com/alpha/omega/security/idprovider/keycloak/KeyCloakReactiveAuthenticationManagerResolver.class
+com/alpha/omega/security/key/KeyUtils$SecureTextRandomProvider.class
 com/alpha/omega/security/client/RedisReactiveClientRegistrationRepository$RedisReactiveClientRegistrationRepositoryBuilder.class
 com/alpha/omega/security/idprovider/keycloak/KeyCloakInitializer.class
 com/alpha/omega/security/model/UserProfile.class
@@ -99,7 +100,6 @@ com/alpha/omega/security/context/AOSecurityContext$AOSecurityContextBuilderImpl.
 com/alpha/omega/security/rx/AORxAuthenticationConvertor.class
 com/alpha/omega/security/context/UserContextPermissionsService.class
 com/alpha/omega/security/key/PublicKeyResolverProperties.class
-com/alpha/omega/security/idprovider/keycloak/KeycloakJwtRolesReactiveConverter.class
 com/alpha/omega/security/authorization/ZippedAuthorizationService$BiZipAuthorizationResponse.class
 com/alpha/omega/security/authorization/NOOPAuthorizationService.class
 com/alpha/omega/security/filter/WebFilterPosition.class
@@ -142,6 +142,7 @@ com/alpha/omega/security/utils/AOSecurityChecker$SecurityObject.class
 com/alpha/omega/security/spel/Helper$ConfigHolder.class
 com/alpha/omega/security/authorization/AuthorizationServiceProperties.class
 com/alpha/omega/security/client/ReactiveSecurityWebFilterFactory$NoOpReactiveAuthenticationManager.class
+com/alpha/omega/security/context/DefaultUserContextPermissionsService$DefaultUserContextPermissionsServiceBuilder.class
 com/alpha/omega/security/token/StandardTokenIssuerClaimsMappingService.class
 com/alpha/omega/security/authorization/ZippedAuthorizationService.class
 com/alpha/omega/security/rx/AORxServerWebExchangeToRequestMap.class
@@ -151,7 +152,6 @@ com/alpha/omega/security/idprovider/keycloak/KeyCloakUtils$1.class
 com/alpha/omega/security/authentication/AOAuthenticationConvertor$AOAuthenticationConvertorBuilderImpl.class
 com/alpha/omega/security/authentication/AOBaseAuthenticationException.class
 com/alpha/omega/security/authentication/UserProfileAuthentication.class
-com/alpha/omega/security/idprovider/keycloak/KeyCloakConfig.class
 com/alpha/omega/security/response/AOSecurityResponse.class
 com/alpha/omega/security/authentication/HttpServletRequestToRequestMap.class
 com/alpha/omega/security/model/UserProfile$UserProfileBuilder.class

@@ -16,9 +16,6 @@ public class AuthorizationRequestAttributesAuthorizationService implements Autho
 		if (StringUtils.isNotBlank(authorizationRequest.getUserName())){
 			authorities.add(new AOSimpleAuthority(authorizationRequest.getUserName()));
 		}
-		if (StringUtils.isNotBlank(authorizationRequest.getServiceName())){
-			authorities.add(new AOSimpleAuthority(authorizationRequest.getServiceName()));
-		}
 		return Optional.of(AuthorizationResponse
 				.newBuilder()
 				.setAuthorities(authorities)

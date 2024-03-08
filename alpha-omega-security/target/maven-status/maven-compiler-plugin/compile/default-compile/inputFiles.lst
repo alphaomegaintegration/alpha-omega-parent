@@ -1,6 +1,5 @@
 /Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/utils/AOSecurityChecker.java
 /Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/authorization/NOOPAuthorizationService.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/idprovider/keycloak/KeyCloakConfig.java
 /Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/authorization/ZippedAuthorizationService.java
 /Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/authentication/RequestToRequestMap.java
 /Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/authorization/InMemoryAuthorizationService.java
@@ -17,8 +16,8 @@
 /Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/context/ContextRole.java
 /Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/context/AOServerSecurityContextService.java
 /Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/client/BasicServerWebExchangeConvertor.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/idprovider/keycloak/KeycloakJwtRolesConverter.java
 /Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/authentication/AOAuthenticationConvertor.java
+/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/context/DefaultUserContextPermissionsService.java
 /Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/client/InstantExpiry.java
 /Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/utils/AOSecurityUtils.java
 /Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/authentication/PreAuthenticationPrincipal.java
@@ -100,7 +99,6 @@
 /Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/authorization/AuthorizationResponse.java
 /Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/filter/DefaultAOSecurityFilterChainFactory.java
 /Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/token/InvalidatedTokenService.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/idprovider/keycloak/KeycloakJwtRolesReactiveConverter.java
 /Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/rx/WebRxUtils.java
 /Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/token/TokenRequest.java
 /Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/rx/AORxAuthenticationConvertor.java

@@ -1,10 +1,6 @@
 <settings>
     <!-- https://docs.aws.amazon.com/codeartifact/latest/ug/maven-mvn.html -->
-    <!--
-    <activeProfiles>
-        <activeProfile>github</activeProfile>
-    </activeProfiles>
-    -->
+
     <profiles>
         <profile>
             <id>alpha-omega-code-ao-java-repo</id>
@@ -38,11 +34,7 @@
             </repositories>
         </profile>
     </profiles>
-    <!--
-    <activeProfiles>
-        <activeProfile>alphaomega-repo-alpha-omega-repo</activeProfile>
-    </activeProfiles>
-    -->
+
     <servers>
         <server>
             <id>alpha-omega-code-ao-java-repo</id>

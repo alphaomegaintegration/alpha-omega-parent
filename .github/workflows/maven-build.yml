@@ -17,6 +17,7 @@ jobs:
       - name: Install with Maven
         run: ./mvnw clean install
 
+
   code-artifact:
     runs-on: ubuntu-latest
     steps:
