@@ -13,7 +13,7 @@ import software.amazon.awssdk.services.s3.S3Client;
 @EnableConfigurationProperties({S3Properties.class})
 public class S3Config {
 
-    @Bean
+    @Bean(name = "s3Client")
     S3Client s3Client(S3Properties s3Properties){
         AwsCredentials credentials = AwsBasicCredentials.create(s3Properties.getAccessKey(), s3Properties.getSecretKey());
         AwsCredentialsProvider awsCredentialsProvider = StaticCredentialsProvider.create(credentials);
@@ -24,10 +24,10 @@ public class S3Config {
                 .build();
     }
 
-    @Bean
-    S3Helper s3Helper(S3Client s3Client){
-        return S3Helper.builder()
-                .s3Client(s3Client)
-                .build();
-    }
+	
+	 @Bean(name = "s3Helper")
+	 S3Helper s3Helper(S3Client s3Client){ 
+		 return S3Helper.builder().s3Client(s3Client) .build();
+	 }
+	
 }

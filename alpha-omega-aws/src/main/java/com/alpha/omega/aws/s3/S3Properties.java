@@ -17,7 +17,8 @@ public class S3Properties {
 
     String accessKey;
     String secretKey;
-    Boolean enabled;
+    Boolean enabled=true;
     //@Builder.Default
     Region region = Region.US_EAST_1;
+    	
 }
