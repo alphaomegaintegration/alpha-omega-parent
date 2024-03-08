@@ -29,6 +29,7 @@ import org.springframework.security.oauth2.server.resource.authentication.JwtAut
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.util.UriComponentsBuilder;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.core.scheduler.Scheduler;
 import reactor.core.scheduler.Schedulers;
@@ -37,6 +38,7 @@ import reactor.util.function.Tuples;
 
 import javax.annotation.PostConstruct;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.Function;
@@ -117,7 +119,7 @@ public class KeyCloakAuthenticationManager extends AbstractUserDetailsReactiveAu
                 .map(SecurityUtils.convertUserContextPermissionsToUserDetails());
     }
 
-    protected Mono<UserDetails> retrieveUser(String username,String contextId) {
+    protected Mono<UserDetails> retrieveUser(String username, String contextId) {
         final UserContextRequest userContextRequest = UserContextRequest.builder().contextId(contextId).userId(username).build();
 
         return Mono.just(userContextRequest)
@@ -125,7 +127,6 @@ public class KeyCloakAuthenticationManager extends AbstractUserDetailsReactiveAu
                 .flatMap(request -> userContextPermissionsService.getUserContextByUserIdAndContextId(request))
                 .map(SecurityUtils.convertUserContextPermissionsToUserDetails());
     }
-
 
     protected Mono<UserDetails> retrieveUser(Authentication authentication) {
         String context = determineContext(authentication);
@@ -144,14 +145,14 @@ public class KeyCloakAuthenticationManager extends AbstractUserDetailsReactiveAu
                     .map(SecurityUtils.convertUserContextPermissionsToUserDetails(jwt));
 
         } else {
-            return this.retrieveUser(authentication.getName(),context);
+            return this.retrieveUser(authentication.getName(), context);
         }
 
     }
 
     String determineContext(Authentication authentication) {
 
-        return authentication.getDetails() != null ? ((Map<String,String>)authentication.getDetails()).getOrDefault(CONTEXT_ID,defaultContext)
+        return authentication.getDetails() != null ? ((Map<String, String>) authentication.getDetails()).getOrDefault(CONTEXT_ID, defaultContext)
                 : defaultContext;
     }
 
@@ -160,12 +161,11 @@ public class KeyCloakAuthenticationManager extends AbstractUserDetailsReactiveAu
         return passwordGrantLoginMap(username, password).map(convertResultMapToJwt(jwtDecoder));
     }
 
-
-    public Mono<Optional<Jwt>> passwordGrantLoginJwt(String username, String password,String contextId) {
+    public Mono<Optional<Jwt>> passwordGrantLoginJwt(String username, String password, String contextId) {
         ClientRegistration.Builder builder = ClientRegistration.withRegistrationId(contextId);
-        String jwkSetPath = UriComponentsBuilder.fromHttpUrl(realmBaseUrl).path(CERT_CLIENT_URI).build(Map.of("realm",contextId)).toString();
-        String tokenPath = UriComponentsBuilder.fromHttpUrl(realmBaseUrl).path(TOKEN_CLIENT_URI).build(Map.of("realm",contextId)).toString();
-        String issuerPath = UriComponentsBuilder.fromHttpUrl(realmBaseUrl).path(ISSUER_CLIENT_URI).build(Map.of("realm",contextId)).toString();
+        String jwkSetPath = UriComponentsBuilder.fromHttpUrl(realmBaseUrl).path(CERT_CLIENT_URI).build(Map.of("realm", contextId)).toString();
+        String tokenPath = UriComponentsBuilder.fromHttpUrl(realmBaseUrl).path(TOKEN_CLIENT_URI).build(Map.of("realm", contextId)).toString();
+        String issuerPath = UriComponentsBuilder.fromHttpUrl(realmBaseUrl).path(ISSUER_CLIENT_URI).build(Map.of("realm", contextId)).toString();
         logger.info("Calculated jwkSetPath =>  {} tokenPath => {} issuerUrl => {} for JwtDecoder ",
                 new Object[]{jwkSetPath, tokenPath, issuerPath});
         ClientRegistration clientRegistration = builder.clientId(contextId)
@@ -175,9 +175,8 @@ public class KeyCloakAuthenticationManager extends AbstractUserDetailsReactiveAu
                 .authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
                 .build();
         JwtDecoder decoder = jwtDecoderFactory.createDecoder(clientRegistration);
-        return passwordGrantLoginMap(username, password,contextId).map(convertResultMapToJwt(decoder));
+        return passwordGrantLoginMap(username, password, contextId).map(convertResultMapToJwt(decoder));
     }
-
 
     public Mono<Map<String, Object>> passwordGrantLoginMap(String username, String password) {
 
@@ -193,32 +192,30 @@ public class KeyCloakAuthenticationManager extends AbstractUserDetailsReactiveAu
                         .with("client_secret", realmClientSecret)
                         .with("scope", "openid"))
                 .exchangeToMono(response -> {
-            logger.debug("passwordGrantLoginMap response.statusCode() => {}", response.statusCode());
-            if (response.statusCode().equals(HttpStatus.OK)) {
-                return response.bodyToMono(MAP_OBJECT);
-            } else {
-                // Turn to error
-                return response.createError();
-            }
-        });
+                    logger.debug("passwordGrantLoginMap response.statusCode() => {}", response.statusCode());
+                    if (response.statusCode().equals(HttpStatus.OK)) {
+                        return response.bodyToMono(MAP_OBJECT);
+                    } else {
+                        // Turn to error
+                        return response.createError();
+                    }
+                });
     }
-
-
 
     public Mono<Map<String, Object>> passwordGrantLoginMap(String username, String password, String contextId) {
 
-        logger.debug("passwordGrantLoginMap(String username, String password, String contextId=[{}]) ",contextId);
+        logger.debug("passwordGrantLoginMap(String username, String password, String contextId=[{}]) ", contextId);
         logger.debug("using realmTokenUri => {}, realmClientId => {}", realmTokenUri, realmClientId);
         //logger.info("using realmClientSecret => {}, password => {}", realmClientSecret, password);
-        ClientRepresentation  clientRepresentation = keycloak.realm(contextId).clients().findAll().stream()
+        ClientRepresentation clientRepresentation = keycloak.realm(contextId).clients().findAll().stream()
                 .filter(cr -> cr.getClientId().equals(contextId))
-                 .findAny().orElseThrow(() -> new KeyCloakClientNotFoundException(new StringBuilder(contextId).append(" not found").toString()));
+                .findAny().orElseThrow(() -> new KeyCloakClientNotFoundException(new StringBuilder(contextId).append(" not found").toString()));
         String clientSecret = keycloak.realm(contextId).clients().get(clientRepresentation.getId()).getSecret().getValue();
 
         return webClient.post()
                 //.uri(realmTokenUri)
                 .uri(uriBuilder -> uriBuilder.path(TOKEN_CLIENT_URI)
-                        .build(Map.of("realm",contextId)))
+                        .build(Map.of("realm", contextId)))
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_FORM_URLENCODED_VALUE)
                 .header(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE)
                 .body(BodyInserters.fromFormData("grant_type", "password")
@@ -227,7 +224,7 @@ public class KeyCloakAuthenticationManager extends AbstractUserDetailsReactiveAu
                         .with("client_id", clientRepresentation.getClientId())
                         .with("client_secret", clientSecret)
                         .with("scope", "openid"))
-                .httpRequest(request -> logger.info("request.getURI().toString() => {}",request.getURI().toString()))
+                .httpRequest(request -> logger.info("request.getURI().toString() => {}", request.getURI().toString()))
                 .exchangeToMono(response -> {
                     logger.debug("response.statusCode() => {}", response.statusCode());
                     if (response.statusCode().equals(HttpStatus.OK)) {
@@ -238,7 +235,6 @@ public class KeyCloakAuthenticationManager extends AbstractUserDetailsReactiveAu
                     }
                 });
     }
-
 
     public Mono<Optional<Jwt>> validLoginJwt(String token) {
 
@@ -257,22 +253,15 @@ public class KeyCloakAuthenticationManager extends AbstractUserDetailsReactiveAu
                 return validLoginJwt(username).map(jwt -> Tuples.of(tuple.getT2(), jwt));
             } else {
                 final String presentedPassword = (String) authentication.getCredentials();
-                return passwordGrantLoginJwt(username, presentedPassword,context).map(jwt -> Tuples.of(tuple.getT2(), jwt));
+                return passwordGrantLoginJwt(username, presentedPassword, context).map(jwt -> Tuples.of(tuple.getT2(), jwt));
             }
         };
     }
 
-    // JwtAuthenticationToken
     @Override
     public Mono<Authentication> authenticate(final Authentication authentication) {
-        /*
-        username might be a token or user in basic auth
-        BearerTokenAuthenticationToken or UsernamePasswordAuthenticationToken
-         */
-        //String username = authentication.getName();
-        //logger.info("authentication name => {} TOKEN ??????? => {}", authentication.getClass().getName(), username);
 
-        return   Mono.just(authentication)
+        return Mono.just(authentication)
                 .flatMap(authen -> retrieveUser(authen))
                 .publishOn(this.scheduler)
                 .doOnNext(userDetails -> defaultPreAuthenticationChecks(userDetails))
@@ -282,7 +271,7 @@ public class KeyCloakAuthenticationManager extends AbstractUserDetailsReactiveAu
                 .switchIfEmpty(Mono.defer(() -> Mono.error(new BadCredentialsException("Invalid Credentials"))))
                 .doOnNext(tuple -> defaultPostAuthenticationChecks(tuple.getT1()))
                 .map(tuple -> this.createJwtAuthenticationToken(tuple));
-        }
+    }
 
     private JwtAuthenticationToken createJwtAuthenticationToken(Tuple2<UserDetails, Optional<Jwt>> tuple) {
          /*
@@ -326,8 +315,8 @@ public class KeyCloakAuthenticationManager extends AbstractUserDetailsReactiveAu
 
     @Override
     public Mono<Map<String, Object>> getClientIdProviders(String contextId) {
-        RealmResource realm =   keycloak.realm(contextId);
-        Map<String,Object> aMap = realm.clients().findAll().stream()
+        RealmResource realm = keycloak.realm(contextId);
+        Map<String, Object> aMap = realm.clients().findAll().stream()
                 .collect(Collectors.toMap(cr -> cr.getClientId(), cr -> generateMapFromClient(cr)));
         return Mono.just(aMap);
     }
@@ -338,4 +327,44 @@ public class KeyCloakAuthenticationManager extends AbstractUserDetailsReactiveAu
         aMap.putAll(converted);
         return aMap;
     }
+
+    public Mono<Map<String, Object>> getPublicKeyFromContextId(String contextId) {
+
+        return webClient.get()
+                .uri(uriBuilder -> uriBuilder.path(CERT_CLIENT_URI).build(Map.of("realm", contextId)))
+                .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+                .header(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE)
+
+                .httpRequest(request -> logger.info("request.getURI().toString() => {}", request.getURI().toString()))
+                .exchangeToMono(response -> {
+                    logger.debug("response.statusCode() => {}", response.statusCode());
+                    if (response.statusCode().equals(HttpStatus.OK)) {
+                        return response.bodyToMono(MAP_OBJECT);
+                    } else {
+                        // Turn to error
+                        return response.createError();
+                    }
+                });
+    }
+
+
+    public Mono<Map<String, Object>> getPublicKeysFromContextIds(Flux<String> contextIds) {
+
+        return Flux.from(contextIds)
+                .flatMap(contextId -> getPublicKeyFromContextId(contextId))
+                .collectList()
+                .map(listMaps -> {
+                    Map<String, Object> keyMap = new HashMap<>();
+                    keyMap.put("keys",listMaps);
+                    return keyMap;
+                });
+
+    }
+
+    public Mono<Map<String, Object>> getPublicKeysFromContextIds(List<String> contextIds) {
+        return getPublicKeysFromContextIds(Flux.fromIterable(contextIds));
+    }
+
+
+
 }

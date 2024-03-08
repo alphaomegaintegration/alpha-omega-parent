@@ -17,6 +17,7 @@
 /Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/context/AOServerSecurityContextService.java
 /Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/client/BasicServerWebExchangeConvertor.java
 /Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/authentication/AOAuthenticationConvertor.java
+/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/context/DefaultUserContextPermissionsService.java
 /Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/client/InstantExpiry.java
 /Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/utils/AOSecurityUtils.java
 /Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/authentication/PreAuthenticationPrincipal.java
