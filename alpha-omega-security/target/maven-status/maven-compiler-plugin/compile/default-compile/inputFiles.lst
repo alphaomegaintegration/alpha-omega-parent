@@ -1,109 +1,109 @@
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/utils/AOSecurityChecker.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/authorization/NOOPAuthorizationService.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/idprovider/keycloak/KeyCloakConfig.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/authorization/ZippedAuthorizationService.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/authentication/RequestToRequestMap.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/authorization/InMemoryAuthorizationService.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/permission/AOPermissionEvaluator.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/idprovider/keycloak/KeyCloakAuthenticationManager.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/SecurityConstants.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/context/AOSecurityContext.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/response/AOSecurityResponseExceptionFactory.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/key/PublicKeyResolverRequest.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/authentication/InMemoryBasicRxAuthenticationManager.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/client/RedisReactiveClientRegistrationRepository.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/client/ClientNotFoundException.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/token/TokenService.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/context/ContextRole.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/context/AOServerSecurityContextService.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/client/BasicServerWebExchangeConvertor.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/idprovider/keycloak/KeycloakJwtRolesConverter.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/authentication/AOAuthenticationConvertor.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/client/InstantExpiry.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/utils/AOSecurityUtils.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/authentication/PreAuthenticationPrincipal.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/session/AOSessionProperties.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/filter/AOSecurityWebFilterChainFactory.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/key/PublicKeyPublicKeyResolver.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/authorization/AuthorizationServiceRx.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/idprovider/keycloak/KeyCloakIdpProperties.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/authorization/AuthorizationService.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/authentication/UserProfileAuthentication.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/response/AOSecurityResponse.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/userdetails/UCPUserDetails.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/utils/AOSecurityProperties.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/filter/AOAuthenticationWebFilter.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/permission/Permission.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/client/ClientRegistrationEntity.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/client/ClientRegistrationEntityRepository.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/filter/WebFilterPosition.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/authentication/AOSecurityAuthenticationException.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/authentication/AOSecurityEntryPoint.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/authorization/AuthorizationServiceProperties.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/utils/AOSecurityConstants.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/token/DefaultTokenService.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/key/InvalidPublicKeyException.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/token/InvalidatedTokenRequest.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/filter/AOSecurityFilterChainRequest.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/idprovider/keycloak/KeyCloakUtils.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/authentication/AOBaseAuthenticationException.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/token/TokenResponse.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/authentication/AOAuthenticationSuccessHandler.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/rx/AORxServerWebExchangeToRequestMap.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/model/UserProfile.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/userdetails/InMemoryUserDetails.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/idprovider/keycloak/KeyCloakInitializer.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/client/SecurityService.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/context/UserContextRequest.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/token/AOTokenVerificationException.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/idprovider/keycloak/KeyCloakClientNotFoundException.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/authentication/HttpServletRequestToRequestMap.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/client/ClientIdProviders.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/key/PublicKeyResolver.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/filter/AOSecurityFilter.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/filter/AOSecurityFilterChainFactory.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/token/TokenServiceProperties.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/filter/AORxSecurityWebFilterChainRequest.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/token/InvalidatedTokenResponse.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/idprovider/Holder.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/exception/AOAuthenticationException.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/filter/AOHttpNotFoundWebFilter.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/utils/Principal.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/client/ClientRegistrationConfig.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/response/DefaultAOSecurityResponseExceptionFactory.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/permission/AOSimpleAuthority.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/context/UserContextPermissionsService.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/client/ReactiveSecurityWebFilterFactory.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/client/DefaultSecurityService.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/authorization/NameableAuthorizationService.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/token/TokenIssuerClaimsMapperService.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/filter/DefaultAOSecurityWebFilterChainFactory.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/authorization/AuthorizationRequestAttributesAuthorizationService.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/token/AOJwtHeader.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/authorization/AuthorizationRequest.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/key/PublicKeyResolverProperties.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/filter/AOServerAuthenticationEntryPoint.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/token/StandardTokenIssuerClaimsMappingService.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/model/UserProfileContext.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/context/UserContextPermissions.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/idprovider/keycloak/KeyCloakReactiveAuthenticationManagerResolver.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/idprovider/keycloak/KeyCloakJwtDecoderFactory.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/config/SwaggerWebFluxConfig.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/authorization/LocalJsonAuthorizationService.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/filter/UrlNotFoundServerWebExchangeMatcher.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/spel/Helper.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/config/EnableAOSecurityReactive.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/filter/AOAuthenticationWebFilterBuilder.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/config/EnableAOSecurity.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/client/ClientRegistrationService.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/client/SecurityUtils.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/authorization/AuthorizationResponse.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/filter/DefaultAOSecurityFilterChainFactory.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/token/InvalidatedTokenService.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/idprovider/keycloak/KeycloakJwtRolesReactiveConverter.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/rx/WebRxUtils.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/token/TokenRequest.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/rx/AORxAuthenticationConvertor.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/key/KeyUtils.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/token/AOClaims.java
-/Users/tap/dev/workspaces/jobs/alpha-omega/alpha-omega-parent/alpha-omega-security/src/main/java/com/alpha/omega/security/client/SecurityUser.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\authentication\UserProfileAuthentication.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\utils\AOSecurityProperties.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\idprovider\keycloak\KeyCloakReactiveAuthenticationManagerResolver.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\key\KeyUtils.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\authorization\NameableAuthorizationService.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\model\UserProfileContext.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\SecurityConstants.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\idprovider\keycloak\KeyCloakIdpProperties.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\filter\AORxSecurityWebFilterChainRequest.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\authentication\AOSecurityEntryPoint.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\client\ClientIdProviders.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\filter\UrlNotFoundServerWebExchangeMatcher.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\context\UserContextPermissionsService.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\filter\AOSecurityFilter.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\token\TokenIssuerClaimsMapperService.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\idprovider\keycloak\KeyCloakConfig.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\context\ContextRole.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\client\ClientRegistrationEntity.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\idprovider\keycloak\KeyCloakClientNotFoundException.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\model\UserProfile.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\token\InvalidatedTokenResponse.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\context\UserContextRequest.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\context\AOSecurityContext.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\authorization\LocalJsonAuthorizationService.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\context\AOServerSecurityContextService.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\idprovider\keycloak\KeycloakJwtRolesReactiveConverter.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\client\ClientRegistrationService.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\key\PublicKeyResolverRequest.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\rx\AORxServerWebExchangeToRequestMap.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\idprovider\Holder.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\permission\AOSimpleAuthority.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\filter\WebFilterPosition.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\authorization\ZippedAuthorizationService.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\token\InvalidatedTokenRequest.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\authorization\AuthorizationService.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\client\ClientNotFoundException.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\filter\AOAuthenticationWebFilterBuilder.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\idprovider\keycloak\KeyCloakInitializer.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\token\TokenServiceProperties.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\client\BasicServerWebExchangeConvertor.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\client\ReactiveSecurityWebFilterFactory.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\client\RedisReactiveClientRegistrationRepository.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\config\SwaggerWebFluxConfig.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\filter\DefaultAOSecurityFilterChainFactory.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\client\InstantExpiry.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\response\DefaultAOSecurityResponseExceptionFactory.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\authorization\AuthorizationServiceProperties.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\rx\WebRxUtils.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\utils\Principal.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\token\TokenService.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\filter\DefaultAOSecurityWebFilterChainFactory.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\filter\AOAuthenticationWebFilter.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\filter\AOSecurityWebFilterChainFactory.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\client\DefaultSecurityService.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\rx\AORxAuthenticationConvertor.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\authentication\AOAuthenticationSuccessHandler.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\filter\AOSecurityFilterChainFactory.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\authentication\RequestToRequestMap.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\client\SecurityUtils.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\utils\AOSecurityChecker.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\authorization\AuthorizationServiceRx.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\client\SecurityService.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\authentication\AOBaseAuthenticationException.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\token\AOJwtHeader.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\authentication\InMemoryBasicRxAuthenticationManager.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\key\PublicKeyPublicKeyResolver.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\userdetails\InMemoryUserDetails.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\idprovider\keycloak\KeycloakJwtRolesConverter.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\permission\Permission.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\client\ClientRegistrationConfig.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\token\TokenRequest.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\authorization\AuthorizationRequestAttributesAuthorizationService.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\token\TokenResponse.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\context\UserContextPermissions.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\authentication\AOSecurityAuthenticationException.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\idprovider\keycloak\KeyCloakJwtDecoderFactory.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\authentication\HttpServletRequestToRequestMap.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\token\StandardTokenIssuerClaimsMappingService.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\token\AOTokenVerificationException.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\spel\Helper.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\client\SecurityUser.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\authorization\AuthorizationRequest.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\key\InvalidPublicKeyException.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\token\DefaultTokenService.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\idprovider\keycloak\KeyCloakUtils.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\token\AOClaims.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\userdetails\UCPUserDetails.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\session\AOSessionProperties.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\exception\AOAuthenticationException.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\response\AOSecurityResponse.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\authorization\NOOPAuthorizationService.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\utils\AOSecurityUtils.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\key\PublicKeyResolver.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\response\AOSecurityResponseExceptionFactory.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\utils\AOSecurityConstants.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\filter\AOSecurityFilterChainRequest.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\authentication\AOAuthenticationConvertor.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\token\InvalidatedTokenService.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\authorization\AuthorizationResponse.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\authorization\InMemoryAuthorizationService.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\idprovider\keycloak\KeyCloakAuthenticationManager.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\client\ClientRegistrationEntityRepository.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\config\EnableAOSecurityReactive.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\permission\AOPermissionEvaluator.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\config\EnableAOSecurity.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\authentication\PreAuthenticationPrincipal.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\filter\AOServerAuthenticationEntryPoint.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\key\PublicKeyResolverProperties.java
+C:\coding challenge\greg_aws\alpha-omega-parent\alpha-omega-security\src\main\java\com\alpha\omega\security\filter\AOHttpNotFoundWebFilter.java
