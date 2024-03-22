@@ -34,3 +34,6 @@ replay_pid*
 /src/test/groovy/com/alpha/omega/user/idprovider/keycloak/realm.env
 /amazon-dev-unhrc-bims.env
 /dependencies.txt
+/alpha-omega-security/target/
+
+/.idea

@@ -5,7 +5,8 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.2.2</version>
+        <version>3.1.5</version>
+        <!--version>3.1.5</version-->
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.alpha.omega</groupId>
@@ -21,7 +22,7 @@
         <spring-data-bom-version>2022.0.4</spring-data-bom-version>
         <spring.security.bom.version>6.1.3</spring.security.bom.version>
         <spock.bom.version>2.3-groovy-4.0</spock.bom.version>
-        <testcontainers.bom.version>1.18.3</testcontainers.bom.version>
+        <testcontainers.bom.version>1.19.7</testcontainers.bom.version>
         <jackson.bom.version>2.14.2</jackson.bom.version>
         <groovy.bom.version>4.0.11</groovy.bom.version>
         <objenesis.version>3.3</objenesis.version>
@@ -40,6 +41,7 @@
         <module>alpha-omega-batch</module>
         <module>alpha-omega-security</module>
         <module>alpha-omega-aws</module>
+        <module>alpha-omega-office</module>
     </modules>
 
     <dependencies>
@@ -132,17 +134,13 @@
             <artifactId>jwks-rsa</artifactId>
             <version>0.22.1</version>
         </dependency>
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-text</artifactId>
-            <version>1.10.0</version>
-            <!--scope>compile</scope-->
-        </dependency>
+
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-text</artifactId>
             <version>${commons-text.version}</version>
         </dependency>
+
     </dependencies>
     <dependencyManagement>
         <dependencies>
@@ -237,6 +235,21 @@
                 <version>${aws.java.sdk.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/org.testcontainers/testcontainers-bom -->
+            <dependency>
+                <groupId>org.testcontainers</groupId>
+                <artifactId>testcontainers-bom</artifactId>
+                <version>${testcontainers.bom.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>com.redis</groupId>
+                <artifactId>testcontainers-redis</artifactId>
+                <version>2.2.0</version>
+                <scope>test</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>

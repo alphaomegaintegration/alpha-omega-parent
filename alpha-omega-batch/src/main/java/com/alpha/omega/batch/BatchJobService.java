@@ -65,20 +65,6 @@ public class BatchJobService<T> {
         return convertToBatchResponse().apply(jobExecution);
     }
 
-    /*
-    private Job extractJobFromRequest(BatchApplicantRequest batchApplicantRequest) {
-        Job job = null;
-        if (batchApplicantRequest.getApplicants() == null || batchApplicantRequest.getApplicants().isEmpty()){
-            job = csvJob;
-            validateCsvJobRequest(batchApplicantRequest);
-        } else {
-            job = applicantLoadBatchJobFactory.createJobFromRequest(batchApplicantRequest);
-        }
-        return job;
-    }
-
-     */
-
 
     public BatchResponse getJobStatus(BatchRequest<T> batchApplicantRequest){
         BatchResponse batchApplicantResponse = this.getJobExecution(batchApplicantRequest);

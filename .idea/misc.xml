@@ -11,10 +11,13 @@
         <option value="$PROJECT_DIR$/alpha-omega-cdk/pom.xml" />
         <option value="$PROJECT_DIR$/alpha-omega-batch/pom.xml" />
         <option value="$PROJECT_DIR$/alpha-omega-cache/pom.xml" />
+        <option value="$PROJECT_DIR$/alpha-omega-batch-aws/pom.xml" />
+        <option value="$PROJECT_DIR$/alpha-omega-office/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
       <set>
+        <option value="$PROJECT_DIR$/alpha-omega-batch-aws/pom.xml" />
         <option value="$PROJECT_DIR$/alpha-omega-cdk/pom.xml" />
       </set>
     </option>
