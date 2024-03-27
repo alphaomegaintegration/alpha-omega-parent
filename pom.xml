@@ -5,7 +5,8 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.2.2</version>
+        <version>3.1.5</version>
+        <!--version>3.1.5</version-->
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.alpha.omega</groupId>
@@ -21,7 +22,7 @@
         <spring-data-bom-version>2022.0.4</spring-data-bom-version>
         <spring.security.bom.version>6.1.3</spring.security.bom.version>
         <spock.bom.version>2.3-groovy-4.0</spock.bom.version>
-        <testcontainers.bom.version>1.18.3</testcontainers.bom.version>
+        <testcontainers.bom.version>1.19.7</testcontainers.bom.version>
         <jackson.bom.version>2.14.2</jackson.bom.version>
         <groovy.bom.version>4.0.11</groovy.bom.version>
         <objenesis.version>3.3</objenesis.version>
@@ -32,6 +33,7 @@
         <gmaven-plus.plugin.version>3.0.0</gmaven-plus.plugin.version>
         <maven.surefire.plugin.version>3.0.0-M7</maven.surefire.plugin.version>
         <mapstruct.version>1.5.5.Final</mapstruct.version>
+
     </properties>
 
     <modules>
@@ -40,6 +42,7 @@
         <module>alpha-omega-batch</module>
         <module>alpha-omega-security</module>
         <module>alpha-omega-aws</module>
+        <module>alpha-omega-office</module>
     </modules>
 
     <dependencies>
@@ -48,40 +51,16 @@
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
 
-
-
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-webflux</artifactId>
-        </dependency>
-        <!--
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-function-web</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-stream</artifactId>
-        </dependency>
-        -->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-stream-binder-kafka</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.kafka</groupId>
-            <artifactId>spring-kafka</artifactId>
         </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+        <!--
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-oauth2-client</artifactId>
@@ -92,15 +71,8 @@
             <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
             <scope>compile</scope>
         </dependency>
-        <!--
-       <dependency>
-           <groupId>org.springframework.boot</groupId>
-           <artifactId>spring-boot-starter-oauth2-authorization-server</artifactId>
-       </dependency>
-
-
-
         -->
+
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -132,17 +104,13 @@
             <artifactId>jwks-rsa</artifactId>
             <version>0.22.1</version>
         </dependency>
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-text</artifactId>
-            <version>1.10.0</version>
-            <!--scope>compile</scope-->
-        </dependency>
+
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-text</artifactId>
             <version>${commons-text.version}</version>
         </dependency>
+
     </dependencies>
     <dependencyManagement>
         <dependencies>
@@ -237,6 +205,21 @@
                 <version>${aws.java.sdk.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/org.testcontainers/testcontainers-bom -->
+            <dependency>
+                <groupId>org.testcontainers</groupId>
+                <artifactId>testcontainers-bom</artifactId>
+                <version>${testcontainers.bom.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>com.redis</groupId>
+                <artifactId>testcontainers-redis</artifactId>
+                <version>2.2.0</version>
+                <scope>test</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -377,6 +360,28 @@
 
         </plugins>
         -->
+        <plugins>
+            <!-- ./mvnw clean properties:write-project-properties install -Dproperties.outputFile=alpha-omega-parent.properties -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>properties-maven-plugin</artifactId>
+                <version>1.2.1</version>
+                <executions>
+                    <execution>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>write-project-properties</goal>
+                        </goals>
+                        <configuration>
+                            <outputFile>${project.build.outputDirectory}/alpha-omega-parent.properties</outputFile>
+                            <!--outputFile>
+                                ${project.build.outputDirectory}/alpha-omega-parent.properties
+                            </outputFile-->
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
     </build>
 
 
@@ -388,6 +393,7 @@
         </repository>
 
     </distributionManagement>
+
 
     <profiles>
         <profile>
