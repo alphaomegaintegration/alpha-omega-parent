@@ -32,9 +32,9 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import static com.alpha.omega.core.Constants.*;
+import static com.alpha.omega.security.SecurityConstants.SERVICE_NAME;
 import static com.alpha.omega.security.token.AOClaims.*;
 import static com.alpha.omega.security.utils.AOSecurityUtils.parseBasicAuthString;
-import static org.apache.kafka.common.security.JaasUtils.SERVICE_NAME;
 
 @SuperBuilder
 @NoArgsConstructor
@@ -54,7 +54,7 @@ public class AOAuthenticationConvertor implements AuthenticationConverter {
 	private TokenIssuerClaimsMapperService claimsMapperService;
 
 
-	protected static final List<String> CONVERSION_HEADERS = Arrays.asList(PRINCIPAL, SERVICE_NAME, IDENTITY_PROVIDER, IDENTITY_PROVIDER, CORRELATION_ID, CONTEXT_ID, HttpHeaders.AUTHORIZATION);
+	protected static final List<String> CONVERSION_HEADERS = Arrays.asList(PRINCIPAL, IDENTITY_PROVIDER, IDENTITY_PROVIDER, CORRELATION_ID, CONTEXT_ID, HttpHeaders.AUTHORIZATION);
 
 	@Override
 	public Authentication convert(HttpServletRequest request) {

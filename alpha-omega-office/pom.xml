@@ -8,7 +8,7 @@
         <version>0.0.1-SNAPSHOT</version>
         <!--relativePath></relativePath-->
     </parent>
-    <groupId>com.alpha.omega.office</groupId>
+    <groupId>com.alpha.omega</groupId>
     <artifactId>alpha-omega-office</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>alpha-omega-office</name>
